@@ -250,19 +250,32 @@ const worksSection = {
 
   workCards: [
     {
-      title: "Joonaak Enterprise Solutions",
-      subtitle: "Senior JavaScript Developer",
-      year: "Oct 01, 2018 - Dec 01, 2019",
+      title: "THe Foundry",
+      subtitle: "Senior Web Developer",
+      year: "Apr 20, 2020 - Present",
       image:
-        "https://joonaak.com/wp-content/uploads/revslider/main_slider1/Joonaak-Logo-copy.png",
+        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/80787183_102929864555882_2269820603106066432_n.jpg?_nc_cat=104&_nc_sid=85a577&_nc_eui2=AeFRQ6lkT5BWY2L_qbwwM5jTOGT-87sbLIs4ZP7zuxssizjzkWDJQGKAl-_m2mwKGzA&_nc_oc=AQlWN1A7alwzTdK6eCtPPYyghuQLn05cvJjdeYcnPYJQBNM8BgaYpkJzytPN0WXasWE&_nc_ht=scontent.fpnh20-1.fna&oh=88e074ec3866cbb90bbf7a699fc9d527&oe=5EEF5EF6",
+      footerLink: [{ name: "KOTRA-riel by SHE Investment", url: "" }],
+    },
+    {
+      title: "Ezpizee",
+      subtitle: "Senior Frontend Developer",
+      year: "Mar 02, 2020 - Apr 02, 2020",
+      image:
+        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/67798721_1365710246909463_1158632599929749504_n.png?_nc_cat=107&_nc_sid=7aed08&_nc_eui2=AeHGZw72A1YBhDBDqWoVGGntUzBAEkDnWL5TMEASQOdYvun-47xPEhbjI-3LvSemXc0&_nc_oc=AQlS8VmMKAxsyuBWhVS59rISW7xXJ0bNwB4xxG4HjVcSceMXrTpa4T-KlVEO7vHrO-4&_nc_ht=scontent.fpnh20-1.fna&oh=49f6c6bdbbb2aac132f563287b7eaca5&oe=5EEF1599",
+      footerLink: [{ name: "E-comerce POS App", url: "" }],
+    },
+    {
+      title: "IDP / ACE Cambodia",
+      subtitle: "Web & Mobile Application Developer",
+      year: "Jan 09, 2020 - Feb 28, 2020",
+      image:
+        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/40647524_1875544829206887_6077611403693260800_n.jpg?_nc_cat=1&_nc_sid=85a577&_nc_eui2=AeHYWacLRc8XzNpkEAZIWIzeYnV0xqPkA1RidXTGo-QDVJYPi5HpsJwC78Ml0ILnWio&_nc_oc=AQkXpCZZlQ3rirVfl1ci_BQp__mzIaaDGcpXC7t_nOnxyFbcKG_qUgLHLtmxK6tf3g4&_nc_ht=scontent.fpnh20-1.fna&oh=39cb2cd15548c622fd175aa7cb4e5247&oe=5EEEC333",
       footerLink: [
+        { name: "CamDebate App (Private)", url: "" },
         {
-          name: "Telegram Bill Bot",
-          url: "https://joonaak-bill-bot.web.app/",
-        },
-        {
-          name: "Joonaak Hub v2",
-          url: "https://joonaak-hub.web.app/",
+          name: "Calculate Distance Service",
+          url: "",
         },
       ],
     },
@@ -280,34 +293,21 @@ const worksSection = {
       ],
     },
     {
-      title: "IDP / ACE Cambodia",
-      subtitle: "Web & Mobile Application Developer",
-      year: "Jan 09, 2020 - Feb 28, 2020",
+      title: "Joonaak Enterprise Solutions",
+      subtitle: "Senior JavaScript Developer",
+      year: "Oct 01, 2018 - Dec 01, 2019",
       image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/40647524_1875544829206887_6077611403693260800_n.jpg?_nc_cat=1&_nc_sid=85a577&_nc_eui2=AeHYWacLRc8XzNpkEAZIWIzeYnV0xqPkA1RidXTGo-QDVJYPi5HpsJwC78Ml0ILnWio&_nc_oc=AQkXpCZZlQ3rirVfl1ci_BQp__mzIaaDGcpXC7t_nOnxyFbcKG_qUgLHLtmxK6tf3g4&_nc_ht=scontent.fpnh20-1.fna&oh=39cb2cd15548c622fd175aa7cb4e5247&oe=5EEEC333",
+        "https://joonaak.com/wp-content/uploads/revslider/main_slider1/Joonaak-Logo-copy.png",
       footerLink: [
-        { name: "CamDebate App (Private)", url: "" },
         {
-          name: "Calculate Distance Service",
-          url: "",
+          name: "Telegram Bill Bot",
+          url: "https://joonaak-bill-bot.web.app/",
+        },
+        {
+          name: "Joonaak Hub v2",
+          url: "https://joonaak-hub.web.app/",
         },
       ],
-    },
-    {
-      title: "Ezpizee",
-      subtitle: "Senior Frontend Developer",
-      year: "Mar 02, 2020 - Apr 02, 2020",
-      image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/67798721_1365710246909463_1158632599929749504_n.png?_nc_cat=107&_nc_sid=7aed08&_nc_eui2=AeHGZw72A1YBhDBDqWoVGGntUzBAEkDnWL5TMEASQOdYvun-47xPEhbjI-3LvSemXc0&_nc_oc=AQlS8VmMKAxsyuBWhVS59rISW7xXJ0bNwB4xxG4HjVcSceMXrTpa4T-KlVEO7vHrO-4&_nc_ht=scontent.fpnh20-1.fna&oh=49f6c6bdbbb2aac132f563287b7eaca5&oe=5EEF1599",
-      footerLink: [{ name: "E-comerce POS App", url: "" }],
-    },
-    {
-      title: "THe Foundry",
-      subtitle: "Senior Web Developer",
-      year: "Apr 20, 2020 - Present",
-      image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/80787183_102929864555882_2269820603106066432_n.jpg?_nc_cat=104&_nc_sid=85a577&_nc_eui2=AeFRQ6lkT5BWY2L_qbwwM5jTOGT-87sbLIs4ZP7zuxssizjzkWDJQGKAl-_m2mwKGzA&_nc_oc=AQlWN1A7alwzTdK6eCtPPYyghuQLn05cvJjdeYcnPYJQBNM8BgaYpkJzytPN0WXasWE&_nc_ht=scontent.fpnh20-1.fna&oh=88e074ec3866cbb90bbf7a699fc9d527&oe=5EEF5EF6",
-      footerLink: [{ name: "KOTRA-riel by SHE Investment", url: "" }],
     },
   ],
 };
