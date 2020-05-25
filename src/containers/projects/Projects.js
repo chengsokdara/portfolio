@@ -11,58 +11,58 @@ export default function Projects() {
   const [repo, setrepo] = useState([]);
 
   useEffect(() => {
-    getRepoData();
-  }, []);
+    function getRepoData() {
+      const client = new ApolloClient({
+        uri: "https://api.github.com/graphql",
+        request: (operation) => {
+          operation.setContext({
+            headers: {
+              authorization: `Bearer ${atob(openSource.githubConvertedToken)}`,
+            },
+          });
+        },
+      });
 
-  function getRepoData() {
-    const client = new ApolloClient({
-      uri: "https://api.github.com/graphql",
-      request: (operation) => {
-        operation.setContext({
-          headers: {
-            authorization: `Bearer ${atob(openSource.githubConvertedToken)}`,
-          },
-        });
-      },
-    });
-
-    client
-      .query({
-        query: gql`
-        {
-        user(login: "${openSource.githubUserName}") {
-          pinnedItems(first: 6, types: [REPOSITORY]) {
-            totalCount
-            edges {
-              node {
-                ... on Repository {
-                  name
-                  description
-                  forkCount
-                  stargazers {
-                    totalCount
-                  }
-                  url
-                  id
-                  diskUsage
-                  primaryLanguage {
+      client
+        .query({
+          query: gql`
+          {
+          user(login: "${openSource.githubUserName}") {
+            pinnedItems(first: 6, types: [REPOSITORY]) {
+              totalCount
+              edges {
+                node {
+                  ... on Repository {
                     name
-                    color
+                    description
+                    forkCount
+                    stargazers {
+                      totalCount
+                    }
+                    url
+                    id
+                    diskUsage
+                    primaryLanguage {
+                      name
+                      color
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-        `,
-      })
-      .then((result) => {
-        setrepoFunction(result.data.user.pinnedItems.edges);
-        console.log(result);
-      })
-      .catch((error) => console.log("apollo error", error));
-  }
+          `,
+        })
+        .then((result) => {
+          setrepoFunction(result.data.user.pinnedItems.edges);
+          //console.log(result);
+        })
+        .catch((error) => console.log("apollo error", error));
+    }
+
+    getRepoData();
+  }, []);
 
   function setrepoFunction(array) {
     setrepo(array);

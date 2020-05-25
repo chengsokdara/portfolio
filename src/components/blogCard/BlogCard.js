@@ -4,17 +4,17 @@ import "./BlogCard.css";
 export default function BlogCard({ blog }) {
   return (
     <div>
-      <div class="blog-container">
+      <div className="blog-container">
         <a
-          class="blog-card"
+          className="blog-card"
           href={blog.url}
           rel="noopener noreferrer"
           target="_blank"
         >
           <h3 className="blog-title">{blog.title}</h3>
-          <p class="small">{blog.description}</p>
-          <div class="go-corner">
-            <div class="go-arrow">→</div>
+          <p className="small">{blog.description}</p>
+          <div className="go-corner">
+            <div className="go-arrow">→</div>
           </div>
         </a>
       </div>
