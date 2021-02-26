@@ -154,6 +154,26 @@ const bigProjects = {
     "Mobile apps I made by myself and help to make over the year, completely self-learn.",
   projects: [
     {
+      name: "KOTRA-riel for iOS",
+      image:
+        "https://is3-ssl.mzstatic.com/image/thumb/Purple124/v4/61/22/0e/61220e5a-2536-918b-d53b-821d625996ca/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
+      link: "https://apps.apple.com/dk/app/kotra-riel/id1548441646",
+    },
+    {
+      name: "KOTRA-riel for Android",
+      image:
+        "https://play-lh.googleusercontent.com/10B7UIYmmxVP4-FPu3VrHfPP4x7TdTb6f_w1Ww9ixgzML5r-fNvW0SqSV7ZfV9gI7D8=s180-rw",
+      link:
+        "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel&hl=en&gl=US",
+    },
+    {
+      name: "KHmeter",
+      image:
+        "https://play-lh.googleusercontent.com/8hfSbVBDz6na1biEyq5w068qxeCatgPKGr3B8jSMO9vltT71CbWvg6G-6KIanvYSEIGi=s180-rw",
+      link:
+        "https://play.google.com/store/apps/details?id=com.daradev.taximeter",
+    },
+    {
       name: "Khmer Live TV",
       image:
         "https://image.winudf.com/v2/image1/Y29tLmRhcmFkZXYudHZfaWNvbl8xNTQxMjQ3NDYyXzAwMQ/icon.png?w=170&fakeurl=1",
@@ -254,23 +274,24 @@ const worksSection = {
       subtitle: "Senior Web Developer",
       year: "Apr 20, 2020 - Present",
       image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/80787183_102929864555882_2269820603106066432_n.jpg?_nc_cat=104&_nc_sid=85a577&_nc_eui2=AeFRQ6lkT5BWY2L_qbwwM5jTOGT-87sbLIs4ZP7zuxssizjzkWDJQGKAl-_m2mwKGzA&_nc_oc=AQlWN1A7alwzTdK6eCtPPYyghuQLn05cvJjdeYcnPYJQBNM8BgaYpkJzytPN0WXasWE&_nc_ht=scontent.fpnh20-1.fna&oh=88e074ec3866cbb90bbf7a699fc9d527&oe=5EEF5EF6",
+        "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
       footerLink: [{ name: "KOTRA-riel by SHE Investment", url: "" }],
+      backgroundColor: "#14213d",
     },
     {
       title: "Ezpizee",
       subtitle: "Senior Frontend Developer",
       year: "Mar 02, 2020 - Apr 02, 2020",
-      image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/67798721_1365710246909463_1158632599929749504_n.png?_nc_cat=107&_nc_sid=7aed08&_nc_eui2=AeHGZw72A1YBhDBDqWoVGGntUzBAEkDnWL5TMEASQOdYvun-47xPEhbjI-3LvSemXc0&_nc_oc=AQlS8VmMKAxsyuBWhVS59rISW7xXJ0bNwB4xxG4HjVcSceMXrTpa4T-KlVEO7vHrO-4&_nc_ht=scontent.fpnh20-1.fna&oh=49f6c6bdbbb2aac132f563287b7eaca5&oe=5EEF1599",
+      image: "https://cdn.ezpz.solutions/assets/logo/default-logo_inverted.svg",
       footerLink: [{ name: "E-comerce POS App", url: "" }],
+      backgroundColor: "#075aa5",
     },
     {
       title: "IDP / ACE Cambodia",
       subtitle: "Web & Mobile Application Developer",
       year: "Jan 09, 2020 - Feb 28, 2020",
       image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/40647524_1875544829206887_6077611403693260800_n.jpg?_nc_cat=1&_nc_sid=85a577&_nc_eui2=AeHYWacLRc8XzNpkEAZIWIzeYnV0xqPkA1RidXTGo-QDVJYPi5HpsJwC78Ml0ILnWio&_nc_oc=AQkXpCZZlQ3rirVfl1ci_BQp__mzIaaDGcpXC7t_nOnxyFbcKG_qUgLHLtmxK6tf3g4&_nc_ht=scontent.fpnh20-1.fna&oh=39cb2cd15548c622fd175aa7cb4e5247&oe=5EEEC333",
+        "https://www.idp.com/medias/idp-logo.svg?context=bWFzdGVyfHJvb3R8NjQ4MXxpbWFnZS9zdmcreG1sfGg2OS9oZWYvOTkwNjA4MDU0Njg0Ni5zdmd8NzEzYzk0M2E0M2M5ZTY0MjM0ZGMwNzIzMDhiM2U3MzBkZWU0OTczMTZkOGQwYjA3NTFmYTVhMWViYWFhZDBiMg",
       footerLink: [
         { name: "CamDebate App (Private)", url: "" },
         {
@@ -284,7 +305,7 @@ const worksSection = {
       subtitle: "JavaScript Developer",
       year: "Jul 08, 2019 - Aug 01, 2019",
       image:
-        "https://scontent.fpnh20-1.fna.fbcdn.net/v/t1.0-9/35147391_2111436182437279_8211977959578271744_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_eui2=AeHrAG-3v4-L0UZqul8fCsOQExIcb-opT3ATEhxv6ilPcMKhCK333KJ-8LEFFyzrSOA&_nc_oc=AQnI5VDneMlGwRS0I9avWgzNoDjxGuuXOxDI-fJfKnKlaWkSIj1tHNXGk6TWQ4NS1RU&_nc_ht=scontent.fpnh20-1.fna&oh=ca8d70b73481f60a5d4d1c2e091cfabc&oe=5EF08C95",
+        "https://clik.asia/static/logo-landscape-c2779f10cbc832a5d8a4c00f1eeee8d6.png",
       footerLink: [
         {
           name: "ActStore",

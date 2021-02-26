@@ -12,6 +12,13 @@
 .card-image {
   height: 250px;
   width: 250px;
+  object-fit: contain;
+}
+.card-image-dark {
+  height: 250px;
+  width: 250px;
+  object-fit: contain;
+  border-radius: 125px;
 }
 
 .card-title {

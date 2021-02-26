@@ -9,7 +9,16 @@ export default function WorkCard({ cardInfo }) {
   return (
     <div className="work-card">
       <div className="work-image-div">
-        <img src={cardInfo.image} alt="PWA" className="card-image"></img>
+        <img
+          src={cardInfo.image}
+          alt="PWA"
+          className={
+            cardInfo.backgroundColor ? "card-image-dark" : "card-image"
+          }
+          style={{
+            backgroundColor: cardInfo.backgroundColor,
+          }}
+        ></img>
       </div>
       <div className="work-detail-div">
         <h5 className="card-title">{cardInfo.title}</h5>

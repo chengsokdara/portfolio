@@ -7,9 +7,10 @@
   margin-bottom: 30px;
 }
 
-.starup-project-image > img {
-  max-width: 100%;
-  height: auto;
+.startup-project-item-div > img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
 }
 
 .project-card-head {

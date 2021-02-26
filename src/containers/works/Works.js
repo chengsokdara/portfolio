@@ -27,6 +27,7 @@ export default function Works() {
                     year: card.year,
                     image: card.image,
                     footer: card.footerLink,
+                    backgroundColor: card.backgroundColor,
                   }}
                 />
               );

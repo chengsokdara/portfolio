@@ -22,12 +22,12 @@ export default class Main extends Component {
       <div>
         <Header />
         <Greeting />
-        <Skills />
-        <StackProgress />
-        <StartupProject />
         <Works />
+        <StartupProject />
         <Projects />
         <Blogs />
+        <Skills />
+        <StackProgress />
         {/* <Talks /> */}
         {/* <Twitter /> */}
         {/* <Podcast /> */}

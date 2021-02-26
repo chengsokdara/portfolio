@@ -18,23 +18,23 @@ function Header() {
             <span className="navicon"></span>
           </label>
           <ul className="menu">
-            <li>
-              <a href="#skills">Skills</a>
-            </li>
             {/* <li>
               <a href="#achievements">Works</a>
             </li> */}
             <li>
-              <a href="#projects">Projects</a>
+              <a href="#works">Works</a>
             </li>
             <li>
-              <a href="#works">Works</a>
+              <a href="#projects">Projects</a>
             </li>
             <li>
               <a href="#opensource">Open Source</a>
             </li>
             <li>
               <a href="#blogs">Blogs</a>
+            </li>
+            <li>
+              <a href="#skills">Skills</a>
             </li>
             {/* <li>
               <a href="#talks">Talks</a>
