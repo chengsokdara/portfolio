@@ -1,5 +1,6 @@
 import React from "react";
 import "./Contact.css";
+import ContactMailPng from "../../assests/images/contactMail.png";
 import SocialMedia from "../../components/socialMedia/SocialMedia";
 import { contactInfo } from "../../portfolio";
 import { Fade } from "react-reveal";
@@ -31,10 +32,7 @@ export default function Contact() {
             </div>
           </div>
           <div className="contact-image-div">
-            <img
-              alt="Ra Working"
-              src={require("../../assests/images/contactMail.png")}
-            ></img>
+            <img alt="Ra Working" src={ContactMailPng}></img>
           </div>
         </div>
       </div>

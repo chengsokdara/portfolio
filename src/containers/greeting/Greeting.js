@@ -1,5 +1,6 @@
-﻿import React from "react";
+import React from "react";
 import "./Greeting.css";
+import ProgrammerSvg from "../../assests/images/programmer.svg";
 import SocialMedia from "../../components/socialMedia/SocialMedia";
 import Button from "../../components/button/Button";
 import { greeting } from "../../portfolio";
@@ -31,10 +32,7 @@ export default function Greeting() {
             </div>
           </div>
           <div className="greeting-image-div">
-            <img
-              alt="ra sitting on table"
-              src={require("../../assests/images/programmer.svg")}
-            ></img>
+            <img alt="ra sitting on table" src={ProgrammerSvg}></img>
           </div>
         </div>
       </div>

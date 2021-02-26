@@ -1,5 +1,6 @@
 import React from "react";
 import "./Skills.css";
+import DeveloperActivitySvg from "../../assests/images/developerActivity.svg";
 import SoftwareSkill from "../../components/softwareSkills/SoftwareSkill";
 import { skillsSection } from "../../portfolio";
 import { Fade } from "react-reveal";
@@ -10,10 +11,7 @@ export default function Skills() {
       <div className="skills-main-div">
         <Fade left duration={1000}>
           <div className="skills-image-div">
-            <img
-              alt="Ra Working"
-              src={require("../../assests/images/developerActivity.svg")}
-            ></img>
+            <img alt="Ra Working" src={DeveloperActivitySvg}></img>
           </div>
         </Fade>
         <Fade right duration={1000}>
