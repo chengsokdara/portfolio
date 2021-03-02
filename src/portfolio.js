@@ -24,7 +24,7 @@ const greeting = {
     "javascript, node, react, react-native, electron, android, kotlin, java, firebase, graphql, aws, etc...",
   ]),
   resumeLink:
-    "https://docs.google.com/document/d/1PIxudE13LQjNhPPm42nOloR9EO8nhcalvnijZi68lPk/edit?usp=sharing",
+    "https://drive.google.com/file/d/1MbnSIYJ0cO0a_6o9WtJ480HMLgeAKk9w/view?usp=sharing",
 };
 
 // Your Social Media Link
@@ -270,9 +270,9 @@ const worksSection = {
 
   workCards: [
     {
-      title: "THe Foundry",
+      title: "The Foundry",
       subtitle: "Senior Web Developer",
-      year: "Apr 20, 2020 - Present",
+      year: "Apr 20, 2020 - Feb 01, 2021",
       image:
         "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
       footerLink: [{ name: "KOTRA-riel by SHE Investment", url: "" }],
