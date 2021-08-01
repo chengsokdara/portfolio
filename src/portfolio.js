@@ -9,13 +9,13 @@ const greeting = {
   username: "Ra",
   title: "Cheng Sokdara Portfolio",
   subTitle: emoji([
-    "A Multiversal Stack Software Engineer. 🚀",
+    "Full-Stack Software Engineer. 🚀",
     <br />,
-    "Expertise in NodeJs, ReactJs and React Native. ⚛️",
+    "Specialize in React Native, ReactJs and NodeJs . ⚛️",
     <br />,
     "Experienced in Kotlin and Java for Android. 🤖",
     <br />,
-    "Proficient in mananging Firebase and AWS. ☁️",
+    "Proficient in mananging Firebase. ☁️",
     <br />,
     <br />,
     "With almost a decade of experience in the field, I can make any applications for any platforms. 💪",
@@ -154,6 +154,40 @@ const bigProjects = {
     "Mobile apps I made by myself and help to make over the year, completely self-learn.",
   projects: [
     {
+      name: "MDF Commerce Web App",
+      image: "https://www.mdfcommerce.com/images/2020_logo_mdf.svg",
+      link: "https://mdf-commerce.vercel.app/",
+    },
+    {
+      name: "MELP App (releasing)",
+      image: "https://melp.com/wp-content/themes/mp-wp/assets/images/logo.png",
+      link: "https://melp.com/",
+    },
+    {
+      name: "NO-CV for iOS (maintainer)",
+      image:
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple115/v4/ae/d9/de/aed9de04-bf14-a4e4-0e63-4e520143539e/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
+      link: "https://apps.apple.com/gb/app/no-cv/id1515692284",
+    },
+    {
+      name: "NO-CV for Android (maintainer)",
+      image:
+        "https://play-lh.googleusercontent.com/2RtouLIshDIrnpxQUsWjc9yJrRYxwcTiXfiljTRR-4K55cGERBF1q7rJNOuLKPe2kg=s360-rw",
+      link: "https://play.google.com/store/apps/details?id=eu.nocvapp.nocv",
+    },
+    {
+      name: "KhmerQR Pro",
+      image:
+        "https://play-lh.googleusercontent.com/N6R8UGGkEGRLRDsWwFkkh4TtEPfE8HFIwHoH8MB7vMzVJ7IASiLqjg6l9vkk3Nlt-w=s360-rw",
+      link: "https://play.google.com/store/apps/details?id=com.rawewhat.khmerqr.paid",
+    },
+    {
+      name: "KhmerQR",
+      image:
+        "https://play-lh.googleusercontent.com/-Y1Jjp_y_0bJz8t3sTwZ__VHZHxPvGcMN51in5_tnOG6LlOMzEI8lXKDKWMUl-gN_A=s360-rw",
+      link: "https://play.google.com/store/apps/details?id=com.rawewhat.khmerqr",
+    },
+    {
       name: "KOTRA-riel for iOS",
       image:
         "https://is3-ssl.mzstatic.com/image/thumb/Purple124/v4/61/22/0e/61220e5a-2536-918b-d53b-821d625996ca/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
@@ -163,15 +197,13 @@ const bigProjects = {
       name: "KOTRA-riel for Android",
       image:
         "https://play-lh.googleusercontent.com/10B7UIYmmxVP4-FPu3VrHfPP4x7TdTb6f_w1Ww9ixgzML5r-fNvW0SqSV7ZfV9gI7D8=s180-rw",
-      link:
-        "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel&hl=en&gl=US",
+      link: "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel",
     },
     {
       name: "KHmeter",
       image:
         "https://play-lh.googleusercontent.com/8hfSbVBDz6na1biEyq5w068qxeCatgPKGr3B8jSMO9vltT71CbWvg6G-6KIanvYSEIGi=s180-rw",
-      link:
-        "https://play.google.com/store/apps/details?id=com.daradev.taximeter",
+      link: "https://play.google.com/store/apps/details?id=com.daradev.taximeter",
     },
     {
       name: "Khmer Live TV",
@@ -183,22 +215,19 @@ const bigProjects = {
       name: "Khmer Unicode Installer",
       image:
         "https://lh3.googleusercontent.com/DBcbktYKyuNKjPKe7SO2MarZM23l6E23Gx8bQ5kU0dfMtcBVwDaB5rId67jHiKSuKwo=s180-rw",
-      link:
-        "https://play.google.com/store/apps/details?id=com.blogspot.androidsanctum.kui",
+      link: "https://play.google.com/store/apps/details?id=com.blogspot.androidsanctum.kui",
     },
     {
       name: "Khmer Font Store",
       image:
         "https://lh3.googleusercontent.com/WDnI-suefO27BgRGi8-oSjUXkEAIaHTxvEDZa8Vr9iBXQxYPplYSxY-5gvcUKsufc_c=s180-rw",
-      link:
-        "https://play.google.com/store/apps/details?id=com.daradev.fontstore",
+      link: "https://play.google.com/store/apps/details?id=com.daradev.fontstore",
     },
     {
       name: "Joonaak Merchant",
       image:
         "https://lh3.googleusercontent.com/5ynblL2_5PpTFErTivBLDIYh1wG2I7paoM3p8S7FXnQZ9DdVmiBED4rQUOMii1a8QlSQ=s180-rw",
-      link:
-        "https://play.google.com/store/apps/details?id=com.joonaak_merchant_app",
+      link: "https://play.google.com/store/apps/details?id=com.joonaak_merchant_app",
     },
   ],
 };
@@ -217,18 +246,15 @@ const achievementSection = {
       footerLink: [
         {
           name: "Certification",
-          url:
-            "https://drive.google.com/file/d/0B7kazrtMwm5dYkVvNjdNWjNybWJrbndFSHpNY2NFV1p4YmU0/view?usp=sharing",
+          url: "https://drive.google.com/file/d/0B7kazrtMwm5dYkVvNjdNWjNybWJrbndFSHpNY2NFV1p4YmU0/view?usp=sharing",
         },
         {
           name: "Award Letter",
-          url:
-            "https://drive.google.com/file/d/0B7kazrtMwm5dekxBTW5hQkg2WXUyR3QzQmR0VERiLXlGRVdF/view?usp=sharing",
+          url: "https://drive.google.com/file/d/0B7kazrtMwm5dekxBTW5hQkg2WXUyR3QzQmR0VERiLXlGRVdF/view?usp=sharing",
         },
         {
           name: "Google Code-in Blog",
-          url:
-            "https://opensource.googleblog.com/2019/01/google-code-in-2018-winners.html",
+          url: "https://opensource.googleblog.com/2019/01/google-code-in-2018-winners.html",
         },
       ],
     },
@@ -241,8 +267,7 @@ const achievementSection = {
       footerLink: [
         {
           name: "View Google Assistant Action",
-          url:
-            "https://assistant.google.com/services/a/uid/000000100ee688ee?hl=en",
+          url: "https://assistant.google.com/services/a/uid/000000100ee688ee?hl=en",
         },
       ],
     },
@@ -271,11 +296,48 @@ const worksSection = {
   workCards: [
     {
       title: "The Foundry",
+      subtitle: "Freelance React Developer",
+      year: "Jul 19, 2021 - Present",
+      image:
+        "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
+      footerLink: [{ name: "Cybersecurity", url: "" }],
+      backgroundColor: "#14213d",
+    },
+    {
+      title: "Mediapark Cambodia",
+      subtitle: "Senior React Developer",
+      year: "Apr 1, 2021 - June 1, 2021",
+      image:
+        "https://mediapark.com/wp-content/themes/mediapark/assets/images/mp_logo_white.png",
+      footerLink: [
+        { name: "MELP (releasing)", url: "" },
+        {
+          name: "NO-CV for iOS",
+          url: "https://apps.apple.com/gb/app/no-cv/id1515692284",
+        },
+        {
+          name: "NO-CV for Android",
+          url: "https://play.google.com/store/apps/details?id=eu.nocvapp.nocv",
+        },
+      ],
+      backgroundColor: "#000000",
+    },
+    {
+      title: "The Foundry",
       subtitle: "Senior Web Developer",
       year: "Apr 20, 2020 - Feb 01, 2021",
       image:
         "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
-      footerLink: [{ name: "KOTRA-riel by SHE Investment", url: "" }],
+      footerLink: [
+        {
+          name: "KOTRA-riel for iOS",
+          url: "https://apps.apple.com/dk/app/kotra-riel/id1548441646",
+        },
+        {
+          name: "KOTRA-riel for Android",
+          url: "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel&hl=en&gl=US",
+        },
+      ],
       backgroundColor: "#14213d",
     },
     {
@@ -341,15 +403,13 @@ const blogSection = {
 
   blogs: [
     {
-      url:
-        "https://medium.com/@chengsokdara/global-state-management-purely-with-react-hooks-using-config-like-react-navigation-a9550c3c64cb",
+      url: "https://medium.com/@chengsokdara/global-state-management-purely-with-react-hooks-using-config-like-react-navigation-a9550c3c64cb",
       title: "StoRa, redux simplified",
       description:
         "Global state management purely with React Hooks — using config like React Navigation.",
     },
     {
-      url:
-        "https://medium.com/@chengsokdara/simplified-api-to-use-firestore-written-in-hook-for-react-ff6e31725ebc",
+      url: "https://medium.com/@chengsokdara/simplified-api-to-use-firestore-written-in-hook-for-react-ff6e31725ebc",
       title: "QueRa, firestore simplified",
       description: "Simplified API to use Firestore written in hook for React.",
     },
