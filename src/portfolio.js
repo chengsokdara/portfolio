@@ -9,19 +9,19 @@ const greeting = {
   username: "Ra",
   title: "Cheng Sokdara Portfolio",
   subTitle: emoji([
-    "Full-Stack Software Engineer. 🚀",
+    "Frontend Software Engineer. 🚀",
     <br />,
     "Specialize in React Native, ReactJs and NodeJs . ⚛️",
+    // <br />,
+    // "Experienced in Kotlin and Java for Android. 🤖",
     <br />,
-    "Experienced in Kotlin and Java for Android. 🤖",
-    <br />,
-    "Proficient in mananging Firebase. ☁️",
-    <br />,
-    <br />,
-    "With almost a decade of experience in the field, I can make any applications for any platforms. 💪",
+    "Proficient in mananging Firebase, AWS Amplify, GraphQL. ☁️",
     <br />,
     <br />,
-    "javascript, node, react, react-native, electron, android, kotlin, java, firebase, graphql, aws, etc...",
+    "With more than a decade of experience in the field, I can make any applications for any platforms. 💪",
+    <br />,
+    <br />,
+    "javascript, node, react, react-native, electron, android, kotlin, java, firebase, graphql, aws amplify, etc...",
   ]),
   resumeLink:
     "https://drive.google.com/file/d/1MbnSIYJ0cO0a_6o9WtJ480HMLgeAKk9w/view?usp=sharing",
@@ -33,9 +33,9 @@ const socialMediaLinks = {
   linkedin: "https://www.linkedin.com/in/chengsokdara",
   gmail: "chengsokdara@gmail.com",
   gitlab: "https://gitlab.com/chengsokdara",
-  facebook: "https://www.facebook.com/homi3",
+  // facebook: "https://www.facebook.com/homi3",
   //instagram: "https://www.instagram.com/homi3kh",
-  twitter: "https://twitter.com/homi3kh",
+  // twitter: "https://twitter.com/homi3kh",
 };
 
 // Your Skills Section
@@ -147,33 +147,23 @@ const openSource = {
   showGithubProfile: "false", // Set true or false to show Contact profile using Github, defaults to false
 };
 
-// Some Big Projects You have worked with your company
-const bigProjects = {
-  title: "Personal & Work Projects",
-  subtitle:
-    "Mobile apps I made by myself and help to make over the year, completely self-learn.",
+// Personal Projects
+const personalProjects = {
+  title: "Personal Projects",
+  subTitle:
+    "Mobile app I made all by myself either as a hobby or to learn new technology.",
   projects: [
     {
-      name: "MDF Commerce Web App",
-      image: "https://www.mdfcommerce.com/images/2020_logo_mdf.svg",
-      link: "https://mdf-commerce.vercel.app/",
-    },
-    {
-      name: "MELP App (releasing)",
-      image: "https://melp.com/wp-content/themes/mp-wp/assets/images/logo.png",
-      link: "https://melp.com/",
-    },
-    {
-      name: "NO-CV for iOS (maintainer)",
+      name: "My Dress-Up Darling",
       image:
-        "https://is1-ssl.mzstatic.com/image/thumb/Purple115/v4/ae/d9/de/aed9de04-bf14-a4e4-0e63-4e520143539e/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
-      link: "https://apps.apple.com/gb/app/no-cv/id1515692284",
+        "https://github.com/chengsokdara/my-dress-up-darling/releases/download/v1.0.0/ic_launcher-playstore.png",
+      link: "https://github.com/chengsokdara/my-dress-up-darling/releases",
     },
     {
-      name: "NO-CV for Android (maintainer)",
+      name: "Wedding Manager",
       image:
-        "https://play-lh.googleusercontent.com/2RtouLIshDIrnpxQUsWjc9yJrRYxwcTiXfiljTRR-4K55cGERBF1q7rJNOuLKPe2kg=s360-rw",
-      link: "https://play.google.com/store/apps/details?id=eu.nocvapp.nocv",
+        "https://play-lh.googleusercontent.com/eoP1rxXk0UGUcVU8PUywxSL-6G9jIMcxk9TbeJLJ36tleJX9QJc8IRE4oILZQ53Jj_M=s360-rw",
+      link: "https://play.google.com/store/apps/details?id=com.chengsokdara.wedding.manager",
     },
     {
       name: "KhmerQR Pro",
@@ -186,18 +176,6 @@ const bigProjects = {
       image:
         "https://play-lh.googleusercontent.com/-Y1Jjp_y_0bJz8t3sTwZ__VHZHxPvGcMN51in5_tnOG6LlOMzEI8lXKDKWMUl-gN_A=s360-rw",
       link: "https://play.google.com/store/apps/details?id=com.rawewhat.khmerqr",
-    },
-    {
-      name: "KOTRA-riel for iOS",
-      image:
-        "https://is3-ssl.mzstatic.com/image/thumb/Purple124/v4/61/22/0e/61220e5a-2536-918b-d53b-821d625996ca/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
-      link: "https://apps.apple.com/dk/app/kotra-riel/id1548441646",
-    },
-    {
-      name: "KOTRA-riel for Android",
-      image:
-        "https://play-lh.googleusercontent.com/10B7UIYmmxVP4-FPu3VrHfPP4x7TdTb6f_w1Ww9ixgzML5r-fNvW0SqSV7ZfV9gI7D8=s180-rw",
-      link: "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel",
     },
     {
       name: "KHmeter",
@@ -223,8 +201,56 @@ const bigProjects = {
         "https://lh3.googleusercontent.com/WDnI-suefO27BgRGi8-oSjUXkEAIaHTxvEDZa8Vr9iBXQxYPplYSxY-5gvcUKsufc_c=s180-rw",
       link: "https://play.google.com/store/apps/details?id=com.daradev.fontstore",
     },
+  ],
+};
+
+// Some Big Projects You have worked with your company
+const bigProjects = {
+  title: "Work Projects",
+  subtitle: "Web and mobile apps that I contributed over the year.",
+  projects: [
     {
-      name: "Joonaak Merchant",
+      name: "Cybersecurity Web App (developer)",
+      image:
+        "https://cybersecurity-kh.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Flogo-header.a40315cbcfe69c794183347a2f8951ec.png&w=256&q=75",
+      link: "https://cybersecurity-kh.com",
+    },
+    {
+      name: "MDF Commerce Web App (contributor)",
+      image: "https://www.mdfcommerce.com/images/2020_logo_mdf.svg",
+      link: "https://mdf-commerce.vercel.app/",
+    },
+    {
+      name: "MELP Mobile App (co-develop)",
+      image: "https://melp.com/wp-content/uploads/2021/05/MELP-Logo.svg",
+      link: "https://melp.com/",
+    },
+    {
+      name: "NO-CV iOS App (contributor)",
+      image:
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple115/v4/ae/d9/de/aed9de04-bf14-a4e4-0e63-4e520143539e/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
+      link: "https://apps.apple.com/gb/app/no-cv/id1515692284",
+    },
+    {
+      name: "NO-CV Android App (contributor)",
+      image:
+        "https://play-lh.googleusercontent.com/2RtouLIshDIrnpxQUsWjc9yJrRYxwcTiXfiljTRR-4K55cGERBF1q7rJNOuLKPe2kg=s360-rw",
+      link: "https://play.google.com/store/apps/details?id=eu.nocvapp.nocv",
+    },
+    {
+      name: "KOTRA-riel iOS App (co-develop)",
+      image:
+        "https://is3-ssl.mzstatic.com/image/thumb/Purple124/v4/61/22/0e/61220e5a-2536-918b-d53b-821d625996ca/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
+      link: "https://apps.apple.com/dk/app/kotra-riel/id1548441646",
+    },
+    {
+      name: "KOTRA-riel Android App (co-develop)",
+      image:
+        "https://play-lh.googleusercontent.com/10B7UIYmmxVP4-FPu3VrHfPP4x7TdTb6f_w1Ww9ixgzML5r-fNvW0SqSV7ZfV9gI7D8=s180-rw",
+      link: "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel",
+    },
+    {
+      name: "Joonaak Merchant Mobile App (developer)",
       image:
         "https://lh3.googleusercontent.com/5ynblL2_5PpTFErTivBLDIYh1wG2I7paoM3p8S7FXnQZ9DdVmiBED4rQUOMii1a8QlSQ=s180-rw",
       link: "https://play.google.com/store/apps/details?id=com.joonaak_merchant_app",
@@ -258,33 +284,6 @@ const achievementSection = {
         },
       ],
     },
-    {
-      title: "Google Assistant Action",
-      subtitle:
-        "Developed a Google Assistant Action JavaScript Guru that is available on 2 Billion devices world wide.",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Google_Assistant_logo.svg/1200px-Google_Assistant_logo.svg.png",
-      footerLink: [
-        {
-          name: "View Google Assistant Action",
-          url: "https://assistant.google.com/services/a/uid/000000100ee688ee?hl=en",
-        },
-      ],
-    },
-
-    {
-      title: "PWA Web App Developer",
-      subtitle: "Completed Certifcation from SMIT for PWA Web App Development",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu93Bd6LDbxPEOXr-hfLqLYzmHny8c0MJoI3exQP-lwpFLRT7g&s",
-      footerLink: [
-        { name: "Certification", url: "" },
-        {
-          name: "Final Project",
-          url: "https://pakistan-olx-1.firebaseapp.com/",
-        },
-      ],
-    },
   ],
 };
 
@@ -294,38 +293,38 @@ const worksSection = {
   subtitle: "Previous workplaces and what I have contributed.",
 
   workCards: [
-    {
-      title: "The Foundry",
-      subtitle: "Freelance React Developer",
-      year: "Jul 19, 2021 - Present",
-      image:
-        "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
-      footerLink: [{ name: "Cybersecurity", url: "" }],
-      backgroundColor: "#14213d",
-    },
-    {
-      title: "Mediapark Cambodia",
-      subtitle: "Senior React Developer",
-      year: "Apr 1, 2021 - June 1, 2021",
-      image:
-        "https://mediapark.com/wp-content/themes/mediapark/assets/images/mp_logo_white.png",
-      footerLink: [
-        { name: "MELP (releasing)", url: "" },
-        {
-          name: "NO-CV for iOS",
-          url: "https://apps.apple.com/gb/app/no-cv/id1515692284",
-        },
-        {
-          name: "NO-CV for Android",
-          url: "https://play.google.com/store/apps/details?id=eu.nocvapp.nocv",
-        },
-      ],
-      backgroundColor: "#000000",
-    },
+    // {
+    //   title: "The Foundry",
+    //   subtitle: "Freelance React Developer",
+    //   year: "Jul 19, 2021 - Present",
+    //   image:
+    //     "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
+    //   footerLink: [{ name: "Cybersecurity", url: "" }],
+    //   backgroundColor: "#14213d",
+    // },
+    // {
+    //   title: "Mediapark Cambodia",
+    //   subtitle: "Senior React Developer",
+    //   year: "Apr 1, 2021 - June 1, 2021",
+    //   image:
+    //     "https://mediapark.com/wp-content/themes/mediapark/assets/images/mp_logo_white.png",
+    //   footerLink: [
+    //     { name: "MELP (releasing)", url: "" },
+    //     {
+    //       name: "NO-CV for iOS",
+    //       url: "https://apps.apple.com/gb/app/no-cv/id1515692284",
+    //     },
+    //     {
+    //       name: "NO-CV for Android",
+    //       url: "https://play.google.com/store/apps/details?id=eu.nocvapp.nocv",
+    //     },
+    //   ],
+    //   backgroundColor: "#000000",
+    // },
     {
       title: "The Foundry",
       subtitle: "Senior Web Developer",
-      year: "Apr 20, 2020 - Feb 01, 2021",
+      year: "Apr 20, 2020 - Present",
       image:
         "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
       footerLink: [
@@ -340,41 +339,41 @@ const worksSection = {
       ],
       backgroundColor: "#14213d",
     },
-    {
-      title: "Ezpizee",
-      subtitle: "Senior Frontend Developer",
-      year: "Mar 02, 2020 - Apr 02, 2020",
-      image: "https://cdn.ezpz.solutions/assets/logo/default-logo_inverted.svg",
-      footerLink: [{ name: "E-comerce POS App", url: "" }],
-      backgroundColor: "#075aa5",
-    },
-    {
-      title: "IDP / ACE Cambodia",
-      subtitle: "Web & Mobile Application Developer",
-      year: "Jan 09, 2020 - Feb 28, 2020",
-      image:
-        "https://www.idp.com/medias/idp-logo.svg?context=bWFzdGVyfHJvb3R8NjQ4MXxpbWFnZS9zdmcreG1sfGg2OS9oZWYvOTkwNjA4MDU0Njg0Ni5zdmd8NzEzYzk0M2E0M2M5ZTY0MjM0ZGMwNzIzMDhiM2U3MzBkZWU0OTczMTZkOGQwYjA3NTFmYTVhMWViYWFhZDBiMg",
-      footerLink: [
-        { name: "CamDebate App (Private)", url: "" },
-        {
-          name: "Calculate Distance Service",
-          url: "",
-        },
-      ],
-    },
-    {
-      title: "Clik Asia",
-      subtitle: "JavaScript Developer",
-      year: "Jul 08, 2019 - Aug 01, 2019",
-      image:
-        "https://clik.asia/static/logo-landscape-c2779f10cbc832a5d8a4c00f1eeee8d6.png",
-      footerLink: [
-        {
-          name: "ActStore",
-          url: "https://github.com/egislook/actstore",
-        },
-      ],
-    },
+    // {
+    //   title: "Ezpizee",
+    //   subtitle: "Senior Frontend Developer",
+    //   year: "Mar 02, 2020 - Apr 02, 2020",
+    //   image: "https://cdn.ezpz.solutions/assets/logo/default-logo_inverted.svg",
+    //   footerLink: [{ name: "E-comerce POS App", url: "" }],
+    //   backgroundColor: "#075aa5",
+    // },
+    // {
+    //   title: "IDP / ACE Cambodia",
+    //   subtitle: "Web & Mobile Application Developer",
+    //   year: "Jan 09, 2020 - Feb 28, 2020",
+    //   image:
+    //     "https://www.idp.com/medias/idp-logo.svg?context=bWFzdGVyfHJvb3R8NjQ4MXxpbWFnZS9zdmcreG1sfGg2OS9oZWYvOTkwNjA4MDU0Njg0Ni5zdmd8NzEzYzk0M2E0M2M5ZTY0MjM0ZGMwNzIzMDhiM2U3MzBkZWU0OTczMTZkOGQwYjA3NTFmYTVhMWViYWFhZDBiMg",
+    //   footerLink: [
+    //     { name: "CamDebate App (Private)", url: "" },
+    //     {
+    //       name: "Calculate Distance Service",
+    //       url: "",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "Clik Asia",
+    //   subtitle: "JavaScript Developer",
+    //   year: "Jul 08, 2019 - Aug 01, 2019",
+    //   image:
+    //     "https://clik.asia/static/logo-landscape-c2779f10cbc832a5d8a4c00f1eeee8d6.png",
+    //   footerLink: [
+    //     {
+    //       name: "ActStore",
+    //       url: "https://github.com/egislook/actstore",
+    //     },
+    //   ],
+    // },
     {
       title: "Joonaak Enterprise Solutions",
       subtitle: "Senior JavaScript Developer",
@@ -464,6 +463,7 @@ export {
   skillsSection,
   techStack,
   openSource,
+  personalProjects,
   bigProjects,
   achievementSection,
   blogSection,

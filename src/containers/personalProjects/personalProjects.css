@@ -1,0 +1,49 @@
+.personal-projects-main {
+  display: grid;
+}
+
+.personal-projects-main > * {
+  margin-top: 30px;
+}
+
+.personal-project-item-div > img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.project-card-head {
+  color: rgb(36, 41, 46);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0px;
+}
+
+.personal-project-text {
+  /* display: flex;
+  justify-content: space-between; */
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem 1rem;
+}
+
+.project-card-description {
+  color: rgb(88, 96, 105);
+}
+
+.personal-project-item-div {
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .personal-project-image {
+    display: none;
+  }
+  .project-subtitle {
+    font-size: 16px;
+    text-align: center;
+  }
+}

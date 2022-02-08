@@ -20,6 +20,7 @@
     "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-github": "react-scripts build && rm -rf ./chengsokdara.github.io/* && cp -r ./build/* ./chengsokdara.github.io/",
     "deploy": "firebase deploy --only hosting",
     "deploy-gh": "gh-pages -b master -d build",
     "test": "react-scripts test",
