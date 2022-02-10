@@ -41,10 +41,15 @@
 }
 
 .greeting-image-div > img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
-  margin-top: 60px;
+  margin-left: 25%;
+  margin-top: 20%;
+  border-radius: 1000px;
 }
+
+.greeting-
+
 .wave-emoji {
   animation-duration: 1.8s;
   animation-iteration-count: infinite;

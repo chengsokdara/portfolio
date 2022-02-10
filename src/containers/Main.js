@@ -24,12 +24,12 @@ export default class Main extends Component {
         <Header />
         <Greeting />
         <StartupProject />
-        <PersonalProjects />
         <Works />
+        <PersonalProjects />
         <Projects />
+        <Blogs />
         <Skills />
         <StackProgress />
-        <Blogs />
         {/* <Talks /> */}
         {/* <Twitter /> */}
         {/* <Podcast /> */}

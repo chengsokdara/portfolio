@@ -11,17 +11,17 @@ const greeting = {
   subTitle: emoji([
     "Frontend Software Engineer. 🚀",
     <br />,
-    "Specialize in React Native, ReactJs and NodeJs . ⚛️",
+    "Specialize in React and React Native. ⚛️",
     // <br />,
     // "Experienced in Kotlin and Java for Android. 🤖",
     <br />,
-    "Proficient in mananging Firebase, AWS Amplify, GraphQL. ☁️",
+    "Proficient in Node, Firebase, AWS Amplify, GraphQL. ☁️",
     <br />,
     <br />,
     "With more than a decade of experience in the field, I can make any applications for any platforms. 💪",
     <br />,
     <br />,
-    "javascript, node, react, react-native, electron, android, kotlin, java, firebase, graphql, aws amplify, etc...",
+    "javascript, react, react-native, node, electron, android, kotlin, java, firebase, graphql, aws amplify, etc...",
   ]),
   resumeLink:
     "https://drive.google.com/file/d/1MbnSIYJ0cO0a_6o9WtJ480HMLgeAKk9w/view?usp=sharing",
@@ -29,7 +29,7 @@ const greeting = {
 
 // Your Social Media Link
 const socialMediaLinks = {
-  github: "https://github.com/rawewhat",
+  github: "https://github.com/chengsokdara",
   linkedin: "https://www.linkedin.com/in/chengsokdara",
   gmail: "chengsokdara@gmail.com",
   gitlab: "https://gitlab.com/chengsokdara",
@@ -120,19 +120,19 @@ const techStack = {
   viewSkillBars: true, //Set it to true to show Proficiency Section
   experience: [
     {
-      stack: "Mobile (Expert+)",
+      stack: "Mobile (Specialist)",
       progressPercentage: "90%",
     },
     {
-      stack: "Frontend (Expert)", //Insert stack or technology you have experience in
+      stack: "Frontend (Specialist)", //Insert stack or technology you have experience in
       progressPercentage: "80%", //Insert relative proficiency in percentage
     },
     {
-      stack: "Backend (Intermediate)",
-      progressPercentage: "70%",
+      stack: "UI/UX (Specialist)",
+      progressPercentage: "80%",
     },
     {
-      stack: "UI/UX (Intermediate)",
+      stack: "Backend (Intermediate)",
       progressPercentage: "70%",
     },
   ],
@@ -153,12 +153,6 @@ const personalProjects = {
   subTitle:
     "Mobile app I made all by myself either as a hobby or to learn new technology.",
   projects: [
-    {
-      name: "My Dress-Up Darling",
-      image:
-        "https://github.com/chengsokdara/my-dress-up-darling/releases/download/v1.0.0/ic_launcher-playstore.png",
-      link: "https://github.com/chengsokdara/my-dress-up-darling/releases",
-    },
     {
       name: "Wedding Manager",
       image:
@@ -190,16 +184,16 @@ const personalProjects = {
       link: "https://apkpure.com/khmer-live-tv/com.daradev.tv",
     },
     {
-      name: "Khmer Unicode Installer",
-      image:
-        "https://lh3.googleusercontent.com/DBcbktYKyuNKjPKe7SO2MarZM23l6E23Gx8bQ5kU0dfMtcBVwDaB5rId67jHiKSuKwo=s180-rw",
-      link: "https://play.google.com/store/apps/details?id=com.blogspot.androidsanctum.kui",
-    },
-    {
       name: "Khmer Font Store",
       image:
         "https://lh3.googleusercontent.com/WDnI-suefO27BgRGi8-oSjUXkEAIaHTxvEDZa8Vr9iBXQxYPplYSxY-5gvcUKsufc_c=s180-rw",
       link: "https://play.google.com/store/apps/details?id=com.daradev.fontstore",
+    },
+    {
+      name: "Khmer Unicode Installer",
+      image:
+        "https://lh3.googleusercontent.com/DBcbktYKyuNKjPKe7SO2MarZM23l6E23Gx8bQ5kU0dfMtcBVwDaB5rId67jHiKSuKwo=s180-rw",
+      link: "https://play.google.com/store/apps/details?id=com.blogspot.androidsanctum.kui",
     },
   ],
 };
@@ -210,7 +204,7 @@ const bigProjects = {
   subtitle: "Web and mobile apps that I contributed over the year.",
   projects: [
     {
-      name: "Cybersecurity Web App (developer)",
+      name: "Cybersecurity Web App (solo-develop)",
       image:
         "https://cybersecurity-kh.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Flogo-header.a40315cbcfe69c794183347a2f8951ec.png&w=256&q=75",
       link: "https://cybersecurity-kh.com",
@@ -250,7 +244,13 @@ const bigProjects = {
       link: "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel",
     },
     {
-      name: "Joonaak Merchant Mobile App (developer)",
+      name: "Joonaak Driver Mobile App (co-develop)",
+      image:
+        "https://play-lh.googleusercontent.com/HYT8Bsv__FQAuepbzQbEG6ZWN3NMKiY4doaORh2h3PGjCXmZvCD0XjgjlAYplMe__u11=s360-rw",
+      link: "https://play.google.com/store/apps/details?id=com.joonaakdriver",
+    },
+    {
+      name: "Joonaak Merchant Mobile App (solo-develop)",
       image:
         "https://lh3.googleusercontent.com/5ynblL2_5PpTFErTivBLDIYh1wG2I7paoM3p8S7FXnQZ9DdVmiBED4rQUOMii1a8QlSQ=s180-rw",
       link: "https://play.google.com/store/apps/details?id=com.joonaak_merchant_app",
