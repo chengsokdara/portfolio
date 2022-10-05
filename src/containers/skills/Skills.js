@@ -1,6 +1,6 @@
 import React from "react";
 import "./Skills.css";
-import DeveloperActivitySvg from "../../assests/images/developerActivity.svg";
+import DeveloperActivitySvg from "../../assests/images/jsFramework.svg";
 import SoftwareSkill from "../../components/softwareSkills/SoftwareSkill";
 import { skillsSection } from "../../portfolio";
 import { Fade } from "react-reveal";

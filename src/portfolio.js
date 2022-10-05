@@ -142,7 +142,7 @@ const techStack = {
 To know how to get github key look at readme.md */
 const openSource = {
   githubConvertedToken:
-    "MjI3OWI4MDZkNmRmYmJmMzVkMTZmOThjMDQ2YzQ1MTYwZjJmMmQwZA==",
+    "Z2hwX2hmQnlybHIwSDdlcjFJWGhjUlZMYkNzWmxrUWNXTjNIRFhtMQ==",
   githubUserName: "chengsokdara",
   showGithubProfile: "false", // Set true or false to show Contact profile using Github, defaults to false
 };
@@ -204,6 +204,21 @@ const bigProjects = {
   subtitle: "Web and mobile apps that I contributed over the year.",
   projects: [
     {
+      name: "Thegoodpsy Web App (contributor)",
+      image: "https://websie.co/wp-content/uploads/2022/03/thegoodpsy-logo-colored-1.png",
+      link: "https://thegoodpsy.com/"
+    },
+    {
+      name: "Thegoodpsy iOS App (solo-develop)",
+      image: "https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/6b/ba/04/6bba049e-329a-04b5-0321-8ee0d46d07af/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png",
+      link: "https://apps.apple.com/us/app/thegoodpsy/id1617026748",
+    },
+    {
+      name: "Thegoodpsy Android App (solo-develop)",
+      image: "https://play-lh.googleusercontent.com/mwp3rRcxaACiaq3z0R7YwTwIyGDZMTWjNMiisZw57VZ6shr8allGr0sq_ZkwIgmB6A=w480-h960-rw",
+      link: "https://play.google.com/store/apps/details?id=com.thegoodpsy.mobile",
+    },
+    {
       name: "Cybersecurity Web App (solo-develop)",
       image:
         "https://cybersecurity-kh.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Flogo-header.a40315cbcfe69c794183347a2f8951ec.png&w=256&q=75",
@@ -222,7 +237,7 @@ const bigProjects = {
     {
       name: "NO-CV iOS App (contributor)",
       image:
-        "https://is1-ssl.mzstatic.com/image/thumb/Purple115/v4/ae/d9/de/aed9de04-bf14-a4e4-0e63-4e520143539e/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple115/v4/ae/d9/de/aed9de04-bf14-a4e4-0e63-4e520143539e/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png",
       link: "https://apps.apple.com/gb/app/no-cv/id1515692284",
     },
     {
@@ -234,7 +249,7 @@ const bigProjects = {
     {
       name: "KOTRA-riel iOS App (co-develop)",
       image:
-        "https://is3-ssl.mzstatic.com/image/thumb/Purple124/v4/61/22/0e/61220e5a-2536-918b-d53b-821d625996ca/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.png",
+        "https://is3-ssl.mzstatic.com/image/thumb/Purple124/v4/61/22/0e/61220e5a-2536-918b-d53b-821d625996ca/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png",
       link: "https://apps.apple.com/dk/app/kotra-riel/id1548441646",
     },
     {
@@ -293,6 +308,26 @@ const worksSection = {
   subtitle: "Previous workplaces and what I have contributed.",
 
   workCards: [
+    {
+      title: "Websie S.R.L.",
+      subtitle: "Senior Mobile Developer",
+      year: "Mar 01, 2022 - Present",
+      image: "https://websie.co/wp-content/uploads/2022/03/thegoodpsy-logo-colored-1.png",
+      footerLink: [
+        {
+          name: "Thegoodpsy Web App",
+          url: "https://thegoodpsy.com/",
+        },
+        {
+          name: "Thegoodpsy iOS App",
+          url: "https://apps.apple.com/us/app/thegoodpsy/id1617026748",
+        },
+        {
+          name: "Thegoodpsy Android App",
+          url: "https://play.google.com/store/apps/details?id=com.thegoodpsy.mobile",
+        }
+      ]
+    },
     // {
     //   title: "The Foundry",
     //   subtitle: "Freelance React Developer",
@@ -324,7 +359,7 @@ const worksSection = {
     {
       title: "The Foundry",
       subtitle: "Senior Web Developer",
-      year: "Apr 20, 2020 - Present",
+      year: "Apr 20, 2020 - Feb 28, 2022",
       image:
         "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
       footerLink: [

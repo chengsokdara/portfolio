@@ -6,9 +6,8 @@
 }
 .greet-main {
   width: 90%;
-  padding: 20px 10px;
+  padding: 0px 10px;
   margin: 0px auto;
-  margin-top: 2rem;
 }
 
 .gretting-main {
@@ -33,11 +32,12 @@
 .greeting-text {
   font-size: 60px;
   line-height: 1.1;
+  margin: 40px auto;
 }
 
 .greeting-text-p {
-  font-size: 30px;
-  line-height: 40px;
+  font-size: 22px;
+  line-height: 32px;
 }
 
 .greeting-image-div > img {
@@ -47,8 +47,6 @@
   margin-top: 20%;
   border-radius: 1000px;
 }
-
-.greeting-
 
 .wave-emoji {
   animation-duration: 1.8s;

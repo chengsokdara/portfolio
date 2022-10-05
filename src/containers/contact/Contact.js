@@ -1,6 +1,6 @@
 import React from "react";
 import "./Contact.css";
-import ContactMailPng from "../../assests/images/contactMail.png";
+import ContactMailPng from "../../assests/images/contactMe.jpeg";
 import SocialMedia from "../../components/socialMedia/SocialMedia";
 import { contactInfo } from "../../portfolio";
 import { Fade } from "react-reveal";

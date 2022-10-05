@@ -7,7 +7,8 @@
 
 .skills-main-div > * {
   flex: 1;
-  margin-bottom: 30px;
+  justify-content: center;
+  margin: auto 4rem;
 }
 
 .skills-image-div > img {
