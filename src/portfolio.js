@@ -1,4 +1,10 @@
 /* Change this file to get your personal Portfolio */
+import thegoodpsy from './assests/images/thegoodpsy.png'
+import thefoundryapp from './assests/images/thefoundryapp.jpeg'
+import joonaak from './assests/images/joonaak.jpeg'
+import mdf from './assests/images/mdf.png'
+import talkstack from './assests/images/talkstack.png'
+import talkstackblack from './assests/images/talkstackblack.jpg'
 
 // Your Summary And Greeting Section
 import React from "react";
@@ -9,13 +15,13 @@ const greeting = {
   username: "Ra",
   title: "Cheng Sokdara Portfolio",
   subTitle: emoji([
-    "Frontend Software Engineer. 🚀",
+    "Software Engineer. 🚀",
     <br />,
-    "Specialize in React and React Native. ⚛️",
+    "Specialize in ReactJs, React Native and NodeJs. ⚛️",
     // <br />,
     // "Experienced in Kotlin and Java for Android. 🤖",
     <br />,
-    "Proficient in Node, Firebase, AWS Amplify, GraphQL. ☁️",
+    "Proficient in NextJs, Firebase, GraphQL and Twilio. ☁️",
     <br />,
     <br />,
     "With more than a decade of experience in the field, I can make any applications for any platforms. 💪",
@@ -24,7 +30,7 @@ const greeting = {
     "javascript, react, react-native, node, electron, android, kotlin, java, firebase, graphql, aws amplify, etc...",
   ]),
   resumeLink:
-    "https://drive.google.com/file/d/1MbnSIYJ0cO0a_6o9WtJ480HMLgeAKk9w/view?usp=sharing",
+    "https://chengsokdara.github.io/resume",
 };
 
 // Your Social Media Link
@@ -32,9 +38,9 @@ const socialMediaLinks = {
   github: "https://github.com/chengsokdara",
   linkedin: "https://www.linkedin.com/in/chengsokdara",
   gmail: "chengsokdara@gmail.com",
-  gitlab: "https://gitlab.com/chengsokdara",
+  // gitlab: "https://gitlab.com/chengsokdara",
   // facebook: "https://www.facebook.com/homi3",
-  //instagram: "https://www.instagram.com/homi3kh",
+  // instagram: "https://www.instagram.com/homi3kh",
   // twitter: "https://twitter.com/homi3kh",
 };
 
@@ -142,7 +148,7 @@ const techStack = {
 To know how to get github key look at readme.md */
 const openSource = {
   githubConvertedToken:
-    "Z2hwX2hmQnlybHIwSDdlcjFJWGhjUlZMYkNzWmxrUWNXTjNIRFhtMQ==",
+    "Z2hwX0VRWWg2anV0aWxBcm5SMVd5MkZiaU05c1Q4Y2ZtVzE3czk3aw==",
   githubUserName: "chengsokdara",
   showGithubProfile: "false", // Set true or false to show Contact profile using Github, defaults to false
 };
@@ -204,8 +210,18 @@ const bigProjects = {
   subtitle: "Web and mobile apps that I contributed over the year.",
   projects: [
     {
+      name: 'TalkStack API (A.I. Call Agent)',
+      image: talkstackblack,
+      link: 'https://talkstack.ai'
+    },
+    {
+      name: 'TalkStack Dashboard (Drag and Drop Studio)',
+      image: talkstackblack,
+      link: 'https://talkstack.ai'
+    },
+    {
       name: "Thegoodpsy Web App (contributor)",
-      image: "https://websie.co/wp-content/uploads/2022/03/thegoodpsy-logo-colored-1.png",
+      image: thegoodpsy,
       link: "https://thegoodpsy.com/"
     },
     {
@@ -226,12 +242,12 @@ const bigProjects = {
     },
     {
       name: "MDF Commerce Web App (contributor)",
-      image: "https://www.mdfcommerce.com/images/2020_logo_mdf.svg",
+      image: mdf,
       link: "https://mdf-commerce.vercel.app/",
     },
     {
       name: "MELP Mobile App (co-develop)",
-      image: "https://melp.com/wp-content/uploads/2021/05/MELP-Logo.svg",
+      image: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8d/7d/92/8d7d9257-5ff1-0c99-ce2a-01f97ece7ebd/AppIcon-prod-0-0-1x_U007emarketing-0-5-0-0-85-220.png/460x0w.png",
       link: "https://melp.com/",
     },
     {
@@ -309,10 +325,25 @@ const worksSection = {
 
   workCards: [
     {
+      title: 'TalkStack A.I.',
+      subtitle: 'Software Engineer',
+      year: "Aug 01, 2023 - February 20, 2024",
+      image: talkstack,
+      footerLink: [
+        {
+          name: 'TalkStack API'
+        },
+        {
+          name: 'TalkStack Dashboard - Studio'
+        }
+      ],
+      backgroundColor: "#1A1A1A"
+    },
+    {
       title: "Websie S.R.L.",
       subtitle: "Senior Mobile Developer",
-      year: "Mar 01, 2022 - Present",
-      image: "https://websie.co/wp-content/uploads/2022/03/thegoodpsy-logo-colored-1.png",
+      year: "Mar 01, 2022 - Oct 31, 2022",
+      image: thegoodpsy,
       footerLink: [
         {
           name: "Thegoodpsy Web App",
@@ -326,7 +357,7 @@ const worksSection = {
           name: "Thegoodpsy Android App",
           url: "https://play.google.com/store/apps/details?id=com.thegoodpsy.mobile",
         }
-      ]
+      ],
     },
     // {
     //   title: "The Foundry",
@@ -357,11 +388,10 @@ const worksSection = {
     //   backgroundColor: "#000000",
     // },
     {
-      title: "The Foundry",
+      title: "thefoundry.app",
       subtitle: "Senior Web Developer",
       year: "Apr 20, 2020 - Feb 28, 2022",
-      image:
-        "https://thefoundry.app/wp/wp-content/themes/thefoundry/images/TheFoundry_Logo-White.png",
+      image: thefoundryapp,
       footerLink: [
         {
           name: "KOTRA-riel for iOS",
@@ -372,7 +402,7 @@ const worksSection = {
           url: "https://play.google.com/store/apps/details?id=com.she_investment.kotra_riel&hl=en&gl=US",
         },
       ],
-      backgroundColor: "#14213d",
+      // backgroundColor: "#14213d",
     },
     // {
     //   title: "Ezpizee",
@@ -413,8 +443,7 @@ const worksSection = {
       title: "Joonaak Enterprise Solutions",
       subtitle: "Senior JavaScript Developer",
       year: "Oct 01, 2018 - Dec 01, 2019",
-      image:
-        "https://joonaak.com/wp-content/uploads/revslider/main_slider1/Joonaak-Logo-copy.png",
+      image: joonaak,
       footerLink: [
         {
           name: "Telegram Bill Bot",
@@ -434,8 +463,12 @@ const blogSection = {
   title: "Blogs",
   subtitle:
     "With Love for Developing cool stuff, I love to write and teach others what I have learnt.",
-
   blogs: [
+    {
+      url: 'https://medium.com/@chengsokdara/transform-your-speech-into-text-with-the-power-of-openai-and-usewhisper-ca78f8e74160',
+      title: 'useWhisper, react hook for OpenAI Whisper',
+      description: 'Transform Your Speech into Text with the Power of OpenAI and useWhisper'
+    },
     {
       url: "https://medium.com/@chengsokdara/global-state-management-purely-with-react-hooks-using-config-like-react-navigation-a9550c3c64cb",
       title: "StoRa, redux simplified",
@@ -482,8 +515,8 @@ const podcastSection = {
 
 const contactInfo = {
   title: emoji("Contact Me ☎️"),
-  subtitle: "Got a great idea you want to be come reality?",
-  number: "+855-86-558-716",
+  subtitle: "Got a great idea you want to become reality?",
+  number: "+85586558716",
   email_address: "chengsokdara@gmail.com",
 };
 
