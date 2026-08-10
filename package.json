@@ -3,6 +3,9 @@
   "name": "chengsokdara.github.io",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=14 <=16"
+  },
   "dependencies": {
     "@apollo/react-hooks": "3.1.5",
     "apollo-boost": "^0.4.4",
@@ -18,6 +21,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
+    "dev": "bash scripts/dev.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy-github": "rm -rf ./chengsokdara.github.io/* && cp -r ./build/* ./chengsokdara.github.io/",
