@@ -1,25 +1,68 @@
-# Cheng Sokdara Portfolio ⚡️
+# Sokdara Cheng — Portfolio (2026)
 
-## Getting started
+Client-converting personal site for **Sokdara Cheng**, Senior React Native + React engineer in Phnom Penh (ICT+7).
 
-This project uses Create React App (`react-scripts@4`), which requires **Node.js 14–16**.
+Live (after deploy): https://chengsokdara.github.io/
 
-**Recommended** — auto-selects the Node version from `.nvmrc` (via nvm) and starts the dev server:
+## Stack
+
+| Was (v1) | Now (v2) |
+| --- | --- |
+| CRA `react-scripts@4`, React 17, yarn, Node 14–16 | **Vite + React 19 + TypeScript + Tailwind CSS v4**, **npm**, Node **≥20** (LTS) |
+
+This is a **clean rewrite** (not a developerFolio skin). New code is **MIT** — see `LICENSE`. Earlier commits remain GPL-3.0 / developerFolio-derived in history.
+
+## Quick start
 
 ```bash
-yarn install
-yarn dev
+nvm use   # reads .nvmrc → 20
+npm install
+npm run dev
 ```
 
-Manual alternative:
+Preview production build:
 
 ```bash
-nvm use   # uses .nvmrc → Node 16
-yarn start
+npm run build
+npm run preview
 ```
 
-If you see `ERR_PACKAGE_PATH_NOT_EXPORTED` related to `postcss`, you are on a newer Node (17+). Use `yarn dev` (or `nvm use`) and try again.
+## Deploy to GitHub Pages
 
-## License 📄
+The historical flow builds a static site, then copies into a **nested** `chengsokdara.github.io/` checkout (separate git history). That folder is gitignored here so we never destroy Pages history from this repo.
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](./LICENSE) file for details
+```bash
+# 1. Ensure nested Pages repo exists (once)
+#    git clone git@github.com:chengsokdara/chengsokdara.github.io.git
+
+npm run deploy
+# same as: npm run build && npm run deploy:copy
+```
+
+Then in the Pages repo:
+
+```bash
+cd chengsokdara.github.io
+git status
+git add -A
+git commit -m "Deploy portfolio $(date -u +%Y-%m-%d)"
+git push
+```
+
+Override the target path if needed:
+
+```bash
+PAGES_DIR=/path/to/chengsokdara.github.io npm run deploy:copy
+```
+
+`deploy:copy` preserves `.git` and a top-level `resume/` folder if present.
+
+## Content sources
+
+- Resume: https://chengsokdara.github.io/resume/v2
+- Contact: `chengsokdara@gmail.com` · `+855 86 558 716`
+- No invented prices, testimonials, or store ratings.
+
+## License
+
+MIT for this rewrite — see `LICENSE`.

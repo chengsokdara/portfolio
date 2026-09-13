@@ -1,34 +1,69 @@
-@font-face {
-  font-family: 'Agustina Regular';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Agustina Regular'), url('./assests/fonts/Agustina.woff') format('woff');
-  font-display: swap;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
+  --color-ink: #070b14;
+  --color-ink-2: #0b1220;
+  --color-panel: #111827;
+  --color-panel-2: #162033;
+  --color-line: #243044;
+  --color-mist: #9aa8c0;
+  --color-paper: #e8eef8;
+  --color-gold: #f5b942;
+  --color-gold-2: #ffd27a;
+  --color-teal: #3ddeb5;
+  --color-coral: #ff7a6e;
 }
-@font-face {
-  font-family: 'Montserrat';
-  src: local('Montserrat'), url('./assests/fonts/Montserrat-Regular.ttf') format('woff');
-  font-display: swap;
-}
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-html,
-body {
-  scroll-behavior: smooth;
-}
-body {
-  margin: 0;
-  font: 19px / 23px Montserrat, "Montserrat", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-/* Media Query */
-@media (max-width: 1380px) {
-  html,
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    font-size: 16px;
-    line-height: normal;
+    @apply bg-ink text-paper antialiased font-sans;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 10% -10%, rgba(245, 185, 66, 0.12), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 0%, rgba(61, 222, 181, 0.08), transparent 50%),
+      linear-gradient(180deg, #070b14 0%, #0b1220 40%, #070b14 100%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(245, 185, 66, 0.35);
+    color: #fff;
+  }
+
+  a {
+    @apply underline-offset-4;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grid-fade {
+    background-image:
+      linear-gradient(to right, rgba(36, 48, 68, 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(36, 48, 68, 0.45) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+  }
+
+  .glass {
+    background: rgba(17, 24, 39, 0.72);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(36, 48, 68, 0.9);
   }
 }
