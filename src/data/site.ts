@@ -3,14 +3,14 @@ export const site = {
   role: 'Senior React Native + React Engineer',
   location: 'Phnom Penh, Cambodia · ICT+7',
   tagline:
-    'I ship Play/App Store apps and own Khmer + English mobile/web end-to-end — solo or as your senior RN/React hire.',
+    'I ship Play/App Store apps and own Khmer + English mobile/web end-to-end - solo or as your senior RN/React hire.',
   email: 'chengsokdara@gmail.com',
   phoneDisplay: '+855 86 558 716',
   phoneTel: '+85586558716',
   resumeUrl: 'https://chengsokdara.github.io/resume/v2',
   siteUrl: 'https://chengsokdara.github.io/',
   idealClients:
-    'SEA startups, Cambodian SMEs, and global teams that need a solo RN/React engineer with light backend — plus AI/voice product teams.',
+    'SEA startups, Cambodian SMEs, and global teams that need a solo RN/React engineer with light backend - plus AI/voice product teams.',
 } as const
 
 export const social = {
@@ -40,7 +40,7 @@ export const offers = [
     id: 'rn-mvp',
     title: 'React Native MVP to the stores',
     blurb:
-      'Greenfield or rescue an RN/Expo app: navigation, auth, payments, CI, and Play/App Store submission — scoped to what you need to launch.',
+      'Greenfield or rescue an RN/Expo app: navigation, auth, payments, CI, and Play/App Store submission - scoped to what you need to launch.',
     outcome: 'A shippable build with store-ready release notes.',
     cta: 'Scope on a call',
   },
@@ -48,7 +48,7 @@ export const offers = [
     id: 'khmer-i18n',
     title: 'Khmer + English product i18n',
     blurb:
-      'Layouts, fonts, copy flows, and QA for Khmer/English mobile and web — including keyboards, RTL-adjacent edge cases, and bilingual UX.',
+      'Layouts, fonts, copy flows, and QA for Khmer/English mobile and web - including keyboards, RTL-adjacent edge cases, and bilingual UX.',
     outcome: 'A product that feels native to Cambodian and international users.',
     cta: 'Starting from a scoped sprint',
   },
@@ -56,7 +56,7 @@ export const offers = [
     id: 'voice-ai',
     title: 'Voice / AI feature slice',
     blurb:
-      'Whisper transcription, Twilio voice, or OpenAI-powered flows integrated into your RN/React stack — grounded in production work at TalkStack and open-source use-whisper.',
+      'Whisper transcription, Twilio voice, or OpenAI-powered flows integrated into your RN/React stack - grounded in production work at TalkStack and open-source use-whisper.',
     outcome: 'A working voice feature with clear API boundaries.',
     cta: 'Scope on a call',
   },
@@ -66,7 +66,7 @@ export const experience = [
   {
     company: 'HireSplit',
     role: 'Freelance Software Engineer',
-    period: 'Feb 2024 – Jun 2025',
+    period: 'Feb 2024 - Jun 2025',
     place: 'Remote',
     summary:
       'Led end-to-end development of a Next.js referral platform with TypeScript, Tailwind CSS, and Material UI.',
@@ -79,7 +79,7 @@ export const experience = [
   {
     company: 'TalkStack A.I.',
     role: 'Software Engineer',
-    period: 'Aug 2023 – Feb 2024',
+    period: 'Aug 2023 - Feb 2024',
     place: 'Singapore (Remote)',
     summary:
       'Built AI phone-outreach systems: Express APIs, Twilio voice, OpenAI scripts, and a React Flow studio.',
@@ -93,7 +93,7 @@ export const experience = [
   {
     company: 'Thegoodpsy',
     role: 'Senior Mobile Developer',
-    period: 'Mar 2022 – Oct 2022',
+    period: 'Mar 2022 - Oct 2022',
     place: 'Brussels, Belgium (Remote)',
     summary:
       'Partnered with the CTO to port core web flows to React Native for iOS and Android.',
@@ -115,7 +115,7 @@ export const experience = [
   {
     company: 'The Foundry / KOTRA-Riel',
     role: 'Senior Web Developer',
-    period: 'Apr 2020 – Feb 2022',
+    period: 'Apr 2020 - Feb 2022',
     place: 'Phnom Penh, Cambodia',
     summary:
       'Led a team of four on KOTRA-Riel (React Native) and shipped Next.js products for The Foundry.',
@@ -138,7 +138,7 @@ export const experience = [
   {
     company: 'Joonaak',
     role: 'JavaScript Developer',
-    period: 'Oct 2018 – Dec 2019',
+    period: 'Oct 2018 - Dec 2019',
     place: 'Phnom Penh, Cambodia',
     summary:
       'Delivery logistics: driver tracking, merchant app, billing bot, and hub tools.',
@@ -179,7 +179,7 @@ export const projects = [
     name: 'Rawaken',
     status: 'Early',
     summary:
-      'Personal product in early stages — building carefully without chasing vanity metrics.',
+      'Personal product in early stages - building carefully without chasing vanity metrics.',
     proof: 'Early release',
     stack: ['Mobile'],
     links: [
@@ -240,7 +240,7 @@ export const openSource = [
     name: 'use-whisper',
     stars: '~785★',
     summary:
-      'React hook for OpenAI Whisper — speech-to-text with recording and transcription utilities.',
+      'React hook for OpenAI Whisper - speech-to-text with recording and transcription utilities.',
     href: 'https://github.com/chengsokdara/use-whisper',
   },
   {

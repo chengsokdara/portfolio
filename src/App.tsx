@@ -80,6 +80,28 @@ function Block({ children }: { children: ReactNode }) {
   return <div className="space-y-1 whitespace-pre-wrap break-words">{children}</div>
 }
 
+function CommandFrame({
+  command,
+  children,
+}: {
+  command: string
+  children: ReactNode
+}) {
+  const label = command.trim().split(/\s+/)[0]?.toLowerCase() || 'cmd'
+  return (
+    <div className="my-3 overflow-hidden rounded-md border border-line/80 bg-bg-2/50">
+      <div className="flex items-center gap-2 border-b border-line/80 bg-bg/80 px-3 py-1.5">
+        <span className="text-dim">#</span>
+        <span className="text-yellow font-semibold tracking-wide">{label}</span>
+        <span className="ml-auto text-[10px] uppercase tracking-wider text-dim">
+          output
+        </span>
+      </div>
+      <div className="px-3 py-3">{children}</div>
+    </div>
+  )
+}
+
 function runCommand(raw: string): ReactNode {
   const input = raw.trim()
   const [cmd, ...rest] = input.split(/\s+/)
@@ -96,43 +118,43 @@ function runCommand(raw: string): ReactNode {
           <p className="text-yellow">available commands</p>
           <p>
             <span className="text-green">whoami</span>
-            <span className="text-dim">     — bio + positioning</span>
+            <span className="text-dim">     # bio + positioning</span>
           </p>
           <p>
             <span className="text-green">work</span>
-            <span className="text-dim">       — client / employment history</span>
+            <span className="text-dim">       # client / employment history</span>
           </p>
           <p>
             <span className="text-green">projects</span>
-            <span className="text-dim">   — shipped apps</span>
+            <span className="text-dim">   # shipped apps</span>
           </p>
           <p>
             <span className="text-green">oss</span>
-            <span className="text-dim">        — open source</span>
+            <span className="text-dim">        # open source</span>
           </p>
           <p>
             <span className="text-green">stack</span>
-            <span className="text-dim">      — tools I use daily</span>
+            <span className="text-dim">      # tools I use daily</span>
           </p>
           <p>
             <span className="text-green">hire</span>
-            <span className="text-dim">       — how to work with me</span>
+            <span className="text-dim">       # how to work with me</span>
           </p>
           <p>
             <span className="text-green">contact</span>
-            <span className="text-dim">    — email / phone / social</span>
+            <span className="text-dim">    # email / phone / social</span>
           </p>
           <p>
             <span className="text-green">resume</span>
-            <span className="text-dim">     — open resume v2</span>
+            <span className="text-dim">     # open resume v2</span>
           </p>
           <p>
             <span className="text-green">clear</span>
-            <span className="text-dim">      — clear the screen</span>
+            <span className="text-dim">      # clear the screen</span>
           </p>
           <p>
             <span className="text-green">theme</span>
-            <span className="text-dim">      — dark | matrix</span>
+            <span className="text-dim">      # dark | matrix</span>
           </p>
           <p className="pt-2 text-dim">tip: tap a chip below, or type and hit enter.</p>
         </Block>
@@ -164,7 +186,7 @@ function runCommand(raw: string): ReactNode {
         <div key={job.company} className="border-l border-line pl-3">
           <p>
             <span className="text-cyan">{job.company}</span>
-            <span className="text-dim"> — {job.role}</span>
+            <span className="text-dim"> / {job.role}</span>
           </p>
           <p className="text-dim text-xs">
             {job.period} · {job.place}
@@ -258,7 +280,7 @@ function runCommand(raw: string): ReactNode {
       return (
         <Block>
           <p className="text-green">available for freelance / contract</p>
-          <p className="pt-1 text-dim">not a SaaS pricing page — just clear ways to start:</p>
+          <p className="pt-1 text-dim">clear ways to start:</p>
           <div className="mt-3 space-y-3">
             {offers.map((o, i) => (
               <div key={o.id} className="border-l border-green/40 pl-3">
@@ -272,7 +294,7 @@ function runCommand(raw: string): ReactNode {
             ))}
           </div>
           <p className="pt-4">
-            next step → <A href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}>email me</A>
+            next step → <A href={`mailto:${site.email}?subject=Project%20inquiry%20-%20Sokdara%20Cheng`}>email me</A>
             {' or type '}
             <span className="text-green">contact</span>
           </p>
@@ -323,7 +345,7 @@ function runCommand(raw: string): ReactNode {
           <p>
             themes: <span className="text-green">dark</span>,{' '}
             <span className="text-green">matrix</span>
-            <span className="text-dim"> — usage: theme matrix</span>
+            <span className="text-dim">  # usage: theme matrix</span>
           </p>
         )
       }
@@ -401,7 +423,7 @@ const BOOT = [
     tone: 'fg' as Tone,
   },
   {
-    text: 'Type help — or tap a command chip. For clients: start with hire.',
+    text: 'Type help, or tap a command chip. For clients: start with hire.',
     tone: 'dim' as Tone,
   },
 ]
@@ -466,7 +488,10 @@ export default function App() {
 
       setHistory((h) => (trimmed === h[0] ? h : [trimmed, ...h].slice(0, 50)))
       setHistIdx(-1)
-      pushOutput(runCommand(trimmed))
+      const out = runCommand(trimmed)
+      if (out != null) {
+        pushOutput(<CommandFrame command={trimmed}>{out}</CommandFrame>)
+      }
     },
     [pushOutput],
   )
@@ -506,12 +531,12 @@ export default function App() {
           <div>
             <p className="text-green font-semibold tracking-tight">
               {site.name}
-              <span className="text-dim font-normal"> — portfolio.sh</span>
+              <span className="text-dim font-normal"> / portfolio.sh</span>
             </p>
             <p className="text-dim">{site.role}</p>
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2">
-            <A href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}>
+            <A href={`mailto:${site.email}?subject=Project%20inquiry%20-%20Sokdara%20Cheng`}>
               hire →
             </A>
             <span className="text-dim">|</span>
@@ -529,7 +554,7 @@ export default function App() {
             <span className="h-2.5 w-2.5 rounded-full bg-yellow/80" aria-hidden />
             <span className="h-2.5 w-2.5 rounded-full bg-green/80" aria-hidden />
             <span className="ml-2 truncate text-xs text-dim">
-              {PROMPT}:{HOST_PATH} — zsh
+              {PROMPT}:{HOST_PATH} / zsh
             </span>
             <span className="ml-auto hidden text-[10px] uppercase tracking-wider text-dim sm:inline">
               dark · type help
@@ -644,7 +669,7 @@ export default function App() {
 
         <footer className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[11px] text-dim">
           <p>
-            © {new Date().getFullYear()} {site.name} · not a startup landing page · a shell
+            © {new Date().getFullYear()} {site.name}
           </p>
           <p className="flex gap-3">
             <A href={social.github}>github</A>
