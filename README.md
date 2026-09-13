@@ -1,8 +1,8 @@
-# Sokdara Cheng  -  Portfolio (2026)
+# Sokdara Cheng Portfolio (2026)
 
 Interactive **terminal-style** personal portfolio for **Sokdara Cheng**, Senior React Native + React engineer in Phnom Penh (ICT+7).
 
-Dark UI, boot animation, command chips + real CLI (`whoami`, `work`, `projects`, `hire`, …)  -  built to feel like a developer’s machine, built so it is obvious how to hire him.
+Dark UI, boot animation, command chips + real CLI (`whoami`, `work`, `projects`, `hire`, ...) built to feel like a developer's machine, with a clear path to hire him.
 
 Live (after deploy): https://chengsokdara.github.io/
 
@@ -12,7 +12,7 @@ Live (after deploy): https://chengsokdara.github.io/
 | --- | --- |
 | CRA `react-scripts@4`, React 17, yarn, Node 14-16 | **Vite + React 19 + TypeScript + Tailwind CSS v4**, **npm**, Node **≥20** (LTS) |
 
-This is a **clean rewrite** (not a developerFolio skin). New code is **MIT**  -  see `LICENSE`. Earlier commits remain GPL-3.0 / developerFolio-derived in history.
+This is a **clean rewrite** (not a developerFolio skin). New code is **MIT** - see `LICENSE`. Earlier commits remain GPL-3.0 / developerFolio-derived in history.
 
 ## Quick start
 
@@ -67,4 +67,4 @@ PAGES_DIR=/path/to/chengsokdara.github.io npm run deploy:copy
 
 ## License
 
-MIT for this rewrite  -  see `LICENSE`.
+MIT for this rewrite - see `LICENSE`.
