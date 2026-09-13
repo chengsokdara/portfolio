@@ -546,7 +546,12 @@ export default function App() {
               {site.name}
             </p>
             <p className="mt-0.5 text-xs text-dim sm:text-sm">
-              <span className="text-dim">portfolio.sh</span>
+              <a
+                href={site.siteUrl}
+                className="text-cyan no-underline hover:text-green"
+              >
+                chengsokdara.github.io
+              </a>
               <span className="text-dim"> · </span>
               {site.role}
             </p>
