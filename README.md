@@ -1,6 +1,8 @@
 # Sokdara Cheng — Portfolio (2026)
 
-Client-converting personal site for **Sokdara Cheng**, Senior React Native + React engineer in Phnom Penh (ICT+7).
+Interactive **terminal-style** personal portfolio for **Sokdara Cheng**, Senior React Native + React engineer in Phnom Penh (ICT+7).
+
+Dark UI, boot animation, command chips + real CLI (`whoami`, `work`, `projects`, `hire`, …) — built to feel like a developer’s machine, not a SaaS landing page, while still making it obvious how to hire him.
 
 Live (after deploy): https://chengsokdara.github.io/
 

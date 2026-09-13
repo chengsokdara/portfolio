@@ -1,4 +1,13 @@
 import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from 'react'
+import {
   experience,
   offers,
   openSource,
@@ -7,454 +16,642 @@ import {
   social,
   stack,
 } from './data/site'
-import { ArrowUpRight, Mail, Phone } from './components/Icon'
 
-const nav = [
-  { href: '#offers', label: 'Services' },
-  { href: '#work', label: 'Work' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#open-source', label: 'Open source' },
-  { href: '#contact', label: 'Contact' },
+type Line =
+  | { kind: 'boot'; text: string; tone?: Tone }
+  | { kind: 'input'; text: string }
+  | { kind: 'output'; nodes: ReactNode; tone?: Tone }
+
+type Tone = 'dim' | 'green' | 'cyan' | 'yellow' | 'magenta' | 'red' | 'fg'
+
+const PROMPT = 'ra@phnom-penh'
+const HOST_PATH = '~/portfolio'
+
+const QUICK = [
+  'whoami',
+  'work',
+  'projects',
+  'oss',
+  'stack',
+  'hire',
+  'contact',
+  'help',
 ] as const
 
-function HireButtons({ compact = false }: { compact?: boolean }) {
-  return (
-    <div className={`flex flex-wrap gap-3 ${compact ? '' : 'sm:gap-4'}`}>
-      <a
-        href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}
-        className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-ink no-underline transition hover:bg-gold-2"
-      >
-        <Mail className="h-4 w-4" />
-        Email to hire
-      </a>
-      <a
-        href={`tel:${site.phoneTel}`}
-        className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/60 px-5 py-2.5 text-sm font-semibold text-paper no-underline transition hover:border-gold/50 hover:text-gold-2"
-      >
-        <Phone className="h-4 w-4" />
-        {site.phoneDisplay}
-      </a>
-      {!compact && (
-        <a
-          href={site.resumeUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-transparent px-4 py-2.5 text-sm font-medium text-mist no-underline transition hover:text-paper"
-        >
-          Resume
-          <ArrowUpRight />
-        </a>
-      )}
-    </div>
-  )
+function toneClass(tone: Tone = 'fg') {
+  switch (tone) {
+    case 'dim':
+      return 'text-dim'
+    case 'green':
+      return 'text-green'
+    case 'cyan':
+      return 'text-cyan'
+    case 'yellow':
+      return 'text-yellow'
+    case 'magenta':
+      return 'text-magenta'
+    case 'red':
+      return 'text-red'
+    default:
+      return 'text-fg'
+  }
 }
 
-function SectionHeading({
-  eyebrow,
-  title,
-  body,
+function A({
+  href,
+  children,
 }: {
-  eyebrow: string
-  title: string
-  body?: string
+  href: string
+  children: ReactNode
 }) {
   return (
-    <div className="mb-10 max-w-2xl">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-        {eyebrow}
-      </p>
-      <h2 className="font-display text-3xl font-medium tracking-tight text-paper sm:text-4xl text-balance">
-        {title}
-      </h2>
-      {body ? <p className="mt-4 text-base leading-relaxed text-mist">{body}</p> : null}
-    </div>
+    <a
+      href={href}
+      target={href.startsWith('mailto:') || href.startsWith('tel:') ? undefined : '_blank'}
+      rel={href.startsWith('http') ? 'noreferrer' : undefined}
+      className="text-cyan underline decoration-cyan/40 underline-offset-2 hover:text-green"
+    >
+      {children}
+    </a>
   )
 }
 
-export default function App() {
-  return (
-    <div className="relative overflow-x-hidden">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-gold focus:px-3 focus:py-2 focus:text-ink"
-      >
-        Skip to content
-      </a>
+function Block({ children }: { children: ReactNode }) {
+  return <div className="space-y-1 whitespace-pre-wrap break-words">{children}</div>
+}
 
-      <header className="sticky top-0 z-40 border-b border-line/70 glass">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <a href="#top" className="no-underline">
-            <span className="font-display text-lg font-semibold tracking-tight text-paper">
-              Sokdara<span className="text-gold">.</span>
-            </span>
-            <span className="ml-2 hidden text-xs text-mist sm:inline">
-              RN + React · Phnom Penh
-            </span>
-          </a>
-          <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm text-mist no-underline transition hover:text-paper"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}
-            className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3.5 py-2 text-xs font-semibold text-ink no-underline sm:text-sm"
-          >
-            Hire me
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </header>
+function runCommand(raw: string): ReactNode {
+  const input = raw.trim()
+  const [cmd, ...rest] = input.split(/\s+/)
+  const arg = rest.join(' ').trim().toLowerCase()
+  const key = (cmd || '').toLowerCase()
 
-      <main id="main">
-        {/* Hero */}
-        <section id="top" className="relative mx-auto max-w-6xl px-4 pb-20 pt-14 sm:px-6 sm:pt-20">
-          <div className="pointer-events-none absolute inset-0 -z-10 grid-fade opacity-60" />
-          <div className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/50 px-3 py-1 text-xs text-mist">
-            <span className="h-1.5 w-1.5 rounded-full bg-teal" aria-hidden="true" />
-            Available for freelance · {site.location}
-          </div>
-          <h1 className="mt-6 max-w-4xl font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl lg:text-6xl text-balance">
-            Senior React Native + React engineer who{' '}
-            <span className="text-gold">ships to the stores</span> — and owns Khmer +
-            English products end-to-end.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-mist">{site.tagline}</p>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mist/80">
-            Ideal clients: {site.idealClients}
+  if (!key) return null
+
+  switch (key) {
+    case 'help':
+    case '?':
+      return (
+        <Block>
+          <p className="text-yellow">available commands</p>
+          <p>
+            <span className="text-green">whoami</span>
+            <span className="text-dim">     — bio + positioning</span>
           </p>
-          <div className="mt-8">
-            <HireButtons />
-          </div>
-          <dl className="mt-12 grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                label: 'Open source',
-                value: 'use-whisper ~785★',
-                href: openSource[0].href,
-              },
-              {
-                label: 'Stores',
-                value: 'Play + App Store releases',
-              },
-              {
-                label: 'Timezone',
-                value: 'ICT+7 · Cambodia',
-              },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-line bg-panel/40 px-5 py-4"
-              >
-                <dt className="text-xs uppercase tracking-wider text-mist">{item.label}</dt>
-                <dd className="mt-1 text-base font-semibold text-paper">
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1 text-paper no-underline hover:text-gold"
-                    >
-                      {item.value}
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
-                  ) : (
-                    item.value
-                  )}
-                </dd>
-              </div>
+          <p>
+            <span className="text-green">work</span>
+            <span className="text-dim">       — client / employment history</span>
+          </p>
+          <p>
+            <span className="text-green">projects</span>
+            <span className="text-dim">   — shipped apps</span>
+          </p>
+          <p>
+            <span className="text-green">oss</span>
+            <span className="text-dim">        — open source</span>
+          </p>
+          <p>
+            <span className="text-green">stack</span>
+            <span className="text-dim">      — tools I use daily</span>
+          </p>
+          <p>
+            <span className="text-green">hire</span>
+            <span className="text-dim">       — how to work with me</span>
+          </p>
+          <p>
+            <span className="text-green">contact</span>
+            <span className="text-dim">    — email / phone / social</span>
+          </p>
+          <p>
+            <span className="text-green">resume</span>
+            <span className="text-dim">     — open resume v2</span>
+          </p>
+          <p>
+            <span className="text-green">clear</span>
+            <span className="text-dim">      — clear the screen</span>
+          </p>
+          <p>
+            <span className="text-green">theme</span>
+            <span className="text-dim">      — dark | matrix</span>
+          </p>
+          <p className="pt-2 text-dim">tip: tap a chip below, or type and hit enter.</p>
+        </Block>
+      )
+
+    case 'whoami':
+      return (
+        <Block>
+          <p>
+            <span className="text-green">{site.name}</span>
+            <span className="text-dim"> aka ra</span>
+          </p>
+          <p className="text-fg">{site.role}</p>
+          <p className="text-dim">{site.location}</p>
+          <p className="pt-2">{site.tagline}</p>
+          <p className="pt-2 text-dim">ideal clients → {site.idealClients}</p>
+          <p className="pt-2">
+            proof → <A href={openSource[0].href}>use-whisper {openSource[0].stars}</A>
+            {' · '}
+            Khmer Pride Keyboard 1K+ Play downloads
+          </p>
+        </Block>
+      )
+
+    case 'work':
+    case 'experience':
+    case 'jobs': {
+      const rows = experience.map((job) => (
+        <div key={job.company} className="border-l border-line pl-3">
+          <p>
+            <span className="text-cyan">{job.company}</span>
+            <span className="text-dim"> — {job.role}</span>
+          </p>
+          <p className="text-dim text-xs">
+            {job.period} · {job.place}
+          </p>
+          <p className="pt-1">{job.summary}</p>
+          <ul className="mt-1 space-y-0.5 text-dim">
+            {job.highlights.map((h) => (
+              <li key={h}>› {h}</li>
             ))}
-          </dl>
-        </section>
-
-        {/* Offers */}
-        <section id="offers" className="border-t border-line/80 bg-ink-2/50 py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHeading
-              eyebrow="Productized offers"
-              title="Clear ways to start — price scoped on a call"
-              body="No invented day rates here. We align on outcome, timeline, and budget together."
-            />
-            <div className="grid gap-5 lg:grid-cols-3">
-              {offers.map((offer, i) => (
-                <article
-                  key={offer.id}
-                  className="group flex flex-col rounded-3xl border border-line bg-panel p-6 transition hover:border-gold/40"
-                >
-                  <span className="font-display text-4xl text-gold/40">0{i + 1}</span>
-                  <h3 className="mt-4 text-xl font-semibold text-paper">{offer.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-mist">{offer.blurb}</p>
-                  <p className="mt-4 text-sm font-medium text-teal">{offer.outcome}</p>
-                  <a
-                    href={`mailto:${site.email}?subject=${encodeURIComponent(offer.title + ' — inquiry')}`}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold no-underline group-hover:text-gold-2"
-                  >
-                    {offer.cta}
-                    <ArrowUpRight />
-                  </a>
-                </article>
+          </ul>
+          {job.links.length > 0 ? (
+            <p className="pt-1">
+              {job.links.map((l, i) => (
+                <span key={l.href}>
+                  {i > 0 ? <span className="text-dim"> · </span> : null}
+                  <A href={l.href}>{l.label}</A>
+                </span>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Experience */}
-        <section id="work" className="py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHeading
-              eyebrow="Case studies"
-              title="Recent work that maps to client outcomes"
-              body="Company names and store links only — no fabricated testimonials or metrics."
-            />
-            <div className="space-y-5">
-              {experience.map((job) => (
-                <article
-                  key={job.company}
-                  className="rounded-3xl border border-line bg-panel/50 p-6 sm:p-8"
-                >
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold text-paper">{job.company}</h3>
-                      <p className="text-sm text-gold">{job.role}</p>
-                    </div>
-                    <p className="text-sm text-mist">
-                      {job.period}
-                      <span className="mx-2 text-line">·</span>
-                      {job.place}
-                    </p>
-                  </div>
-                  <p className="mt-4 text-base leading-relaxed text-paper/90">{job.summary}</p>
-                  <ul className="mt-4 space-y-2">
-                    {job.highlights.map((h) => (
-                      <li key={h} className="flex gap-3 text-sm leading-relaxed text-mist">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                  {job.links.length > 0 ? (
-                    <div className="mt-5 flex flex-wrap gap-3">
-                      {job.links.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1.5 text-xs font-medium text-paper no-underline hover:border-gold/50 hover:text-gold"
-                        >
-                          {link.label}
-                          <ArrowUpRight className="h-3 w-3" />
-                        </a>
-                      ))}
-                    </div>
-                  ) : null}
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Projects */}
-        <section id="projects" className="border-t border-line/80 bg-ink-2/40 py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHeading
-              eyebrow="Selected products"
-              title="Apps I built and shipped myself"
-            />
-            <div className="grid gap-5 md:grid-cols-2">
-              {projects.map((project) => (
-                <article
-                  key={project.name}
-                  className="flex flex-col rounded-3xl border border-line bg-panel p-6"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-lg font-semibold text-paper">{project.name}</h3>
-                    <span className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-mist">
-                      {project.status}
-                    </span>
-                  </div>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-mist">
-                    {project.summary}
-                  </p>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-teal">
-                    {project.proof}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.stack.map((s) => (
-                      <span
-                        key={s}
-                        className="rounded-md bg-panel-2 px-2 py-1 text-xs text-mist"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {project.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-gold no-underline hover:text-gold-2"
-                      >
-                        {link.label}
-                        <ArrowUpRight />
-                      </a>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Open source */}
-        <section id="open-source" className="py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionHeading
-              eyebrow="Open source"
-              title="Real stars, real repos"
-              body="Social proof limited to public GitHub metrics and store listings."
-            />
-            <div className="grid gap-5 md:grid-cols-2">
-              {openSource.map((repo) => (
-                <a
-                  key={repo.name}
-                  href={repo.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-3xl border border-line bg-panel/60 p-6 no-underline transition hover:border-gold/40"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-lg font-semibold text-paper">{repo.name}</h3>
-                    <span className="rounded-full bg-gold/15 px-3 py-1 text-sm font-semibold text-gold">
-                      {repo.stars}
-                    </span>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-mist">{repo.summary}</p>
-                  <p className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-paper">
-                    View on GitHub
-                    <ArrowUpRight />
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Stack */}
-        <section className="border-t border-line/80 py-16">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-              Stack
             </p>
-            <ul className="flex flex-wrap gap-2.5">
-              {stack.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-full border border-line bg-panel/40 px-4 py-2 text-sm text-paper"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+          ) : null}
+        </div>
+      ))
+      return <div className="space-y-4">{rows}</div>
+    }
 
-        {/* Contact */}
-        <section id="contact" className="border-t border-line/80 bg-panel/30 py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="rounded-[2rem] border border-gold/30 bg-gradient-to-br from-panel to-ink-2 p-8 sm:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-                Let&apos;s build
+    case 'projects':
+    case 'apps': {
+      const filtered = arg
+        ? projects.filter((p) => p.name.toLowerCase().includes(arg))
+        : projects
+      if (filtered.length === 0) {
+        return <p className="text-red">no project match for “{arg}”</p>
+      }
+      return (
+        <div className="space-y-4">
+          {filtered.map((p) => (
+            <div key={p.name} className="border-l border-line pl-3">
+              <p>
+                <span className="text-yellow">{p.name}</span>
+                <span className="text-dim"> [{p.status}]</span>
               </p>
-              <h2 className="mt-4 max-w-2xl font-display text-3xl font-medium text-paper sm:text-4xl text-balance">
-                Have a React Native or React product that needs a senior owner in ICT+7?
-              </h2>
-              <p className="mt-4 max-w-xl text-mist">
-                Email or call. Resume is public. No Calendly invented here — we set a time
-                when you reach out.
+              <p>{p.summary}</p>
+              <p className="text-green text-sm">{p.proof}</p>
+              <p className="text-dim text-sm">{p.stack.join(' · ')}</p>
+              <p className="pt-1">
+                {p.links.map((l, i) => (
+                  <span key={l.href}>
+                    {i > 0 ? <span className="text-dim"> · </span> : null}
+                    <A href={l.href}>{l.label}</A>
+                  </span>
+                ))}
               </p>
-              <div className="mt-8">
-                <HireButtons />
-              </div>
-              <ul className="mt-8 flex flex-wrap gap-4 text-sm text-mist">
-                <li>
-                  <a
-                    href={social.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-mist no-underline hover:text-paper"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={social.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-mist no-underline hover:text-paper"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={social.medium}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-mist no-underline hover:text-paper"
-                  >
-                    Medium
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={site.resumeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-mist no-underline hover:text-paper"
-                  >
-                    Resume v2
-                  </a>
-                </li>
-              </ul>
             </div>
-          </div>
-        </section>
-      </main>
+          ))}
+        </div>
+      )
+    }
 
-      <footer className="border-t border-line py-8">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 text-sm text-mist sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>
-            © {new Date().getFullYear()} {site.name}. Built with Vite + React 19 +
-            TypeScript + Tailwind.
-          </p>
-          <p>
-            <a href={site.siteUrl} className="text-mist no-underline hover:text-paper">
-              chengsokdara.github.io
-            </a>
+    case 'oss':
+    case 'opensource':
+    case 'github':
+      return (
+        <div className="space-y-3">
+          {openSource.map((r) => (
+            <div key={r.name}>
+              <p>
+                <A href={r.href}>{r.name}</A>
+                <span className="text-yellow"> {r.stars}</span>
+              </p>
+              <p className="text-dim">{r.summary}</p>
+            </div>
+          ))}
+          <p className="text-dim">
+            profile → <A href={social.github}>{social.github.replace('https://', '')}</A>
           </p>
         </div>
-      </footer>
+      )
 
-      {/* Mobile sticky hire bar */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line glass p-3 md:hidden">
-        <a
-          href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-gold py-3 text-sm font-semibold text-ink no-underline"
+    case 'stack':
+    case 'skills':
+      return (
+        <Block>
+          <p className="text-yellow">$ cat ~/.stack</p>
+          <p className="pt-1">{stack.join('  ')}</p>
+        </Block>
+      )
+
+    case 'hire':
+    case 'services':
+    case 'offers':
+      return (
+        <Block>
+          <p className="text-green">available for freelance / contract</p>
+          <p className="pt-1 text-dim">not a SaaS pricing page — just clear ways to start:</p>
+          <div className="mt-3 space-y-3">
+            {offers.map((o, i) => (
+              <div key={o.id} className="border-l border-green/40 pl-3">
+                <p>
+                  <span className="text-dim">{i + 1}.</span>{' '}
+                  <span className="text-cyan">{o.title}</span>
+                </p>
+                <p>{o.blurb}</p>
+                <p className="text-dim">{o.outcome}</p>
+              </div>
+            ))}
+          </div>
+          <p className="pt-4">
+            next step → <A href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}>email me</A>
+            {' or type '}
+            <span className="text-green">contact</span>
+          </p>
+        </Block>
+      )
+
+    case 'contact':
+      return (
+        <Block>
+          <p>
+            email{'  '}
+            <A href={`mailto:${site.email}`}>{site.email}</A>
+          </p>
+          <p>
+            phone{'  '}
+            <A href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</A>
+          </p>
+          <p>
+            resume{' '}
+            <A href={site.resumeUrl}>chengsokdara.github.io/resume/v2</A>
+          </p>
+          <p>
+            github{' '}
+            <A href={social.github}>@chengsokdara</A>
+          </p>
+          <p>
+            linkedin{' '}
+            <A href={social.linkedin}>/in/chengsokdara</A>
+          </p>
+          <p className="pt-2 text-dim">timezone {site.location}</p>
+        </Block>
+      )
+
+    case 'resume':
+    case 'cv':
+      if (typeof window !== 'undefined') {
+        window.open(site.resumeUrl, '_blank', 'noreferrer')
+      }
+      return (
+        <p>
+          opening resume → <A href={site.resumeUrl}>{site.resumeUrl}</A>
+        </p>
+      )
+
+    case 'theme': {
+      if (!arg || arg === 'list') {
+        return (
+          <p>
+            themes: <span className="text-green">dark</span>,{' '}
+            <span className="text-green">matrix</span>
+            <span className="text-dim"> — usage: theme matrix</span>
+          </p>
+        )
+      }
+      if (arg === 'dark' || arg === 'matrix') {
+        document.documentElement.dataset.theme = arg
+        localStorage.setItem('portfolio-theme', arg)
+        return <p className="text-green">theme set to {arg}</p>
+      }
+      return <p className="text-red">unknown theme. try: theme dark | theme matrix</p>
+    }
+
+    case 'ls':
+      return (
+        <p className="text-cyan">
+          whoami  work  projects  oss  stack  hire  contact  resume  help
+        </p>
+      )
+
+    case 'neofetch':
+    case 'fetch':
+      return (
+        <Block>
+          <pre className="text-green text-[11px] leading-tight sm:text-xs">{`       _____
+      / ___/__  ______
+     / /__/ _ \\/ __/
+     \\___/\\___/_/   sokdara@github
+`}</pre>
+          <p>
+            <span className="text-dim">OS</span>       PortfolioOS 2.0 (Vite + React 19)
+          </p>
+          <p>
+            <span className="text-dim">Host</span>     {site.location}
+          </p>
+          <p>
+            <span className="text-dim">Shell</span>    zsh-ish · IBM Plex Mono
+          </p>
+          <p>
+            <span className="text-dim">Uptime</span>   7+ years shipping web + mobile
+          </p>
+          <p>
+            <span className="text-dim">Packages</span> {stack.length} daily drivers
+          </p>
+          <p>
+            <span className="text-dim">Stars</span>    use-whisper {openSource[0].stars}
+          </p>
+        </Block>
+      )
+
+    case 'sudo':
+      return <p className="text-red">nice try. you&apos;re already root of this tab.</p>
+
+    case 'echo':
+      return <p>{rest.join(' ') || ''}</p>
+
+    case 'date':
+      return <p>{new Date().toString()}</p>
+
+    default:
+      return (
+        <p className="text-red">
+          command not found: {key}. type <span className="text-green">help</span>.
+        </p>
+      )
+  }
+}
+
+const BOOT = [
+  { text: 'PortfolioOS bootloader v2.0', tone: 'dim' as Tone },
+  { text: '[ OK ] load profile: Sokdara Cheng', tone: 'green' as Tone },
+  { text: '[ OK ] mount /work /projects /oss', tone: 'green' as Tone },
+  { text: '[ OK ] hire channel online', tone: 'green' as Tone },
+  { text: '', tone: 'dim' as Tone },
+  {
+    text: 'Welcome. I ship React Native + React products from Phnom Penh (ICT+7).',
+    tone: 'fg' as Tone,
+  },
+  {
+    text: 'Type help — or tap a command chip. For clients: start with hire.',
+    tone: 'dim' as Tone,
+  },
+]
+
+export default function App() {
+  const [booting, setBooting] = useState(true)
+  const [bootCount, setBootCount] = useState(0)
+  const [lines, setLines] = useState<Line[]>([])
+  const [value, setValue] = useState('')
+  const [history, setHistory] = useState<string[]>([])
+  const [histIdx, setHistIdx] = useState(-1)
+  const bottomRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const reducedMotion = useMemo(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    [],
+  )
+
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio-theme')
+    if (saved === 'matrix' || saved === 'dark') {
+      document.documentElement.dataset.theme = saved
+    }
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setBootCount(BOOT.length)
+      setBooting(false)
+      return
+    }
+    if (bootCount >= BOOT.length) {
+      const t = window.setTimeout(() => setBooting(false), 200)
+      return () => window.clearTimeout(t)
+    }
+    const t = window.setTimeout(() => setBootCount((c) => c + 1), 180)
+    return () => window.clearTimeout(t)
+  }, [bootCount, reducedMotion])
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
+  }, [lines, bootCount, booting, reducedMotion])
+
+  const pushOutput = useCallback((nodes: ReactNode) => {
+    if (nodes == null) return
+    setLines((prev) => [...prev, { kind: 'output', nodes }])
+  }, [])
+
+  const execute = useCallback(
+    (raw: string) => {
+      const trimmed = raw.trim()
+      setLines((prev) => [...prev, { kind: 'input', text: trimmed }])
+      if (!trimmed) return
+
+      const key = trimmed.split(/\s+/)[0]?.toLowerCase()
+      if (key === 'clear' || key === 'cls') {
+        setLines([])
+        return
+      }
+
+      setHistory((h) => (trimmed === h[0] ? h : [trimmed, ...h].slice(0, 50)))
+      setHistIdx(-1)
+      pushOutput(runCommand(trimmed))
+    },
+    [pushOutput],
+  )
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    execute(value)
+    setValue('')
+  }
+
+  const focusInput = () => inputRef.current?.focus()
+
+  return (
+    <div
+      className="relative flex min-h-full flex-col px-3 py-4 sm:px-6 sm:py-8"
+      data-theme-root
+    >
+      <style>{`
+        html[data-theme='matrix'] body {
+          --color-fg: #b6f5c6;
+          --color-dim: #3f7a52;
+          --color-green: #39ff14;
+          --color-cyan: #7dffb3;
+          --color-yellow: #b8ff62;
+          --color-magenta: #9dffa8;
+          --color-bg: #020805;
+          --color-bg-2: #041008;
+          --color-panel: #06140c;
+          --color-line: #12351f;
+        }
+      `}</style>
+
+      <div className="pointer-events-none absolute inset-0 scanlines opacity-40" aria-hidden />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-1 flex-col fade-up">
+        <header className="mb-3 flex items-end justify-between gap-3 text-xs sm:text-sm">
+          <div>
+            <p className="text-green font-semibold tracking-tight">
+              {site.name}
+              <span className="text-dim font-normal"> — portfolio.sh</span>
+            </p>
+            <p className="text-dim">{site.role}</p>
+          </div>
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <A href={`mailto:${site.email}?subject=Project%20inquiry%20—%20Sokdara%20Cheng`}>
+              hire →
+            </A>
+            <span className="text-dim">|</span>
+            <A href={site.resumeUrl}>resume</A>
+          </div>
+        </header>
+
+        <section
+          className="crt-glow relative flex min-h-[70vh] flex-1 flex-col overflow-hidden rounded-xl border border-line bg-panel/90"
+          onClick={focusInput}
+          aria-label="Interactive terminal portfolio"
         >
-          <Mail />
-          Hire Sokdara
-        </a>
+          <div className="flex items-center gap-2 border-b border-line px-3 py-2 sm:px-4">
+            <span className="h-2.5 w-2.5 rounded-full bg-red/80" aria-hidden />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow/80" aria-hidden />
+            <span className="h-2.5 w-2.5 rounded-full bg-green/80" aria-hidden />
+            <span className="ml-2 truncate text-xs text-dim">
+              {PROMPT}:{HOST_PATH} — zsh
+            </span>
+            <span className="ml-auto hidden text-[10px] uppercase tracking-wider text-dim sm:inline">
+              dark · type help
+            </span>
+          </div>
+
+          <div className="flex-1 space-y-2 overflow-y-auto px-3 py-3 text-[13px] leading-relaxed sm:px-4 sm:text-sm">
+            {BOOT.slice(0, bootCount).map((line, i) => (
+              <p
+                key={`boot-${i}`}
+                className={`boot-line ${toneClass(line.tone)}`}
+                style={{ animationDelay: `${i * 40}ms` }}
+              >
+                {line.text || '\u00A0'}
+              </p>
+            ))}
+
+            {!booting &&
+              lines.map((line, i) => {
+                if (line.kind === 'input') {
+                  return (
+                    <p key={`in-${i}`} className="pt-1">
+                      <span className="text-green">{PROMPT}</span>
+                      <span className="text-dim">:</span>
+                      <span className="text-cyan">{HOST_PATH}</span>
+                      <span className="text-dim">$ </span>
+                      <span>{line.text}</span>
+                    </p>
+                  )
+                }
+                if (line.kind === 'output') {
+                  return (
+                    <div key={`out-${i}`} className="boot-line pl-0">
+                      {line.nodes}
+                    </div>
+                  )
+                }
+                return null
+              })}
+
+            {!booting && (
+              <form onSubmit={onSubmit} className="flex items-center gap-0 pt-1">
+                <label className="sr-only" htmlFor="terminal-input">
+                  Terminal command
+                </label>
+                <span className="shrink-0">
+                  <span className="text-green">{PROMPT}</span>
+                  <span className="text-dim">:</span>
+                  <span className="text-cyan">{HOST_PATH}</span>
+                  <span className="text-dim">$ </span>
+                </span>
+                <input
+                  id="terminal-input"
+                  ref={inputRef}
+                  value={value}
+                  autoFocus
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  onChange={(e) => setValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowUp') {
+                      e.preventDefault()
+                      const next = Math.min(histIdx + 1, history.length - 1)
+                      if (history[next] != null) {
+                        setHistIdx(next)
+                        setValue(history[next])
+                      }
+                    } else if (e.key === 'ArrowDown') {
+                      e.preventDefault()
+                      const next = histIdx - 1
+                      if (next < 0) {
+                        setHistIdx(-1)
+                        setValue('')
+                      } else {
+                        setHistIdx(next)
+                        setValue(history[next] ?? '')
+                      }
+                    } else if (e.key === 'Tab') {
+                      e.preventDefault()
+                      const match = QUICK.find((c) => c.startsWith(value.toLowerCase()))
+                      if (match) setValue(match)
+                    }
+                  }}
+                  className="min-w-0 flex-1 bg-transparent text-fg outline-none placeholder:text-dim/50"
+                  placeholder={booting ? '' : 'try hire or whoami'}
+                  disabled={booting}
+                />
+                <span className="blink ml-0.5 inline-block h-4 w-2 bg-cursor" aria-hidden />
+              </form>
+            )}
+            <div ref={bottomRef} />
+          </div>
+        </section>
+
+        <div className="mt-3 flex flex-wrap gap-2" aria-label="Quick commands">
+          {QUICK.map((cmd) => (
+            <button
+              key={cmd}
+              type="button"
+              disabled={booting}
+              onClick={() => {
+                execute(cmd)
+                focusInput()
+              }}
+              className="rounded border border-line bg-bg-2 px-2.5 py-1 text-xs text-cyan transition hover:border-green/50 hover:text-green disabled:opacity-40"
+            >
+              {cmd}
+            </button>
+          ))}
+        </div>
+
+        <footer className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[11px] text-dim">
+          <p>
+            © {new Date().getFullYear()} {site.name} · not a startup landing page · a shell
+          </p>
+          <p className="flex gap-3">
+            <A href={social.github}>github</A>
+            <A href={social.linkedin}>linkedin</A>
+            <A href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</A>
+          </p>
+        </footer>
       </div>
     </div>
   )
