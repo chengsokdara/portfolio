@@ -622,43 +622,54 @@ export default function App() {
                   <span className="text-cyan">{HOST_PATH}</span>
                   <span className="text-dim">$ </span>
                 </span>
-                <input
-                  id="terminal-input"
-                  ref={inputRef}
-                  value={value}
-                  autoFocus
-                  autoCapitalize="off"
-                  autoCorrect="off"
-                  spellCheck={false}
-                  onChange={(e) => setValue(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'ArrowUp') {
-                      e.preventDefault()
-                      const next = Math.min(histIdx + 1, history.length - 1)
-                      if (history[next] != null) {
-                        setHistIdx(next)
-                        setValue(history[next])
+                <span className="relative inline-flex min-w-0 max-w-full items-center">
+                  {!value && !booting ? (
+                    <span className="pointer-events-none absolute left-0 text-dim/50">
+                      try hire or whoami
+                    </span>
+                  ) : null}
+                  <input
+                    id="terminal-input"
+                    ref={inputRef}
+                    value={value}
+                    autoFocus
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    onChange={(e) => setValue(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'ArrowUp') {
+                        e.preventDefault()
+                        const next = Math.min(histIdx + 1, history.length - 1)
+                        if (history[next] != null) {
+                          setHistIdx(next)
+                          setValue(history[next])
+                        }
+                      } else if (e.key === 'ArrowDown') {
+                        e.preventDefault()
+                        const next = histIdx - 1
+                        if (next < 0) {
+                          setHistIdx(-1)
+                          setValue('')
+                        } else {
+                          setHistIdx(next)
+                          setValue(history[next] ?? '')
+                        }
+                      } else if (e.key === 'Tab') {
+                        e.preventDefault()
+                        const match = QUICK.find((c) => c.startsWith(value.toLowerCase()))
+                        if (match) setValue(match)
                       }
-                    } else if (e.key === 'ArrowDown') {
-                      e.preventDefault()
-                      const next = histIdx - 1
-                      if (next < 0) {
-                        setHistIdx(-1)
-                        setValue('')
-                      } else {
-                        setHistIdx(next)
-                        setValue(history[next] ?? '')
-                      }
-                    } else if (e.key === 'Tab') {
-                      e.preventDefault()
-                      const match = QUICK.find((c) => c.startsWith(value.toLowerCase()))
-                      if (match) setValue(match)
-                    }
-                  }}
-                  className="min-w-0 flex-1 bg-transparent text-fg caret-green outline-none placeholder:text-dim/50"
-                  placeholder={booting ? '' : 'try hire or whoami'}
-                  disabled={booting}
-                />
+                    }}
+                    style={{ width: `${Math.max(value.length, 1)}ch` }}
+                    className="max-w-full bg-transparent text-fg caret-transparent outline-none"
+                    disabled={booting}
+                  />
+                  <span
+                    className="blink ml-px inline-block h-[1.1em] w-[0.65ch] shrink-0 bg-cursor align-middle"
+                    aria-hidden
+                  />
+                </span>
               </form>
             )}
             <div ref={bottomRef} />
