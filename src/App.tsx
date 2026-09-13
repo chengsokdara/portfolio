@@ -622,9 +622,9 @@ export default function App() {
                   <span className="text-cyan">{HOST_PATH}</span>
                   <span className="text-dim">$ </span>
                 </span>
-                <span className="relative inline-flex min-w-0 max-w-full items-center">
+                <span className="relative flex min-w-0 flex-1 items-center overflow-x-auto">
                   {!value && !booting ? (
-                    <span className="pointer-events-none absolute left-0 text-dim/50">
+                    <span className="pointer-events-none absolute left-[0.85ch] whitespace-nowrap text-dim/50">
                       try hire or whoami
                     </span>
                   ) : null}
@@ -661,12 +661,12 @@ export default function App() {
                         if (match) setValue(match)
                       }
                     }}
-                    style={{ width: `${Math.max(value.length, 1)}ch` }}
+                    style={{ width: `${Math.max(value.length, 0)}ch` }}
                     className="max-w-full bg-transparent text-fg caret-transparent outline-none"
                     disabled={booting}
                   />
                   <span
-                    className="blink ml-px inline-block h-[1.1em] w-[0.65ch] shrink-0 bg-cursor align-middle"
+                    className="blink z-10 ml-px inline-block h-[1.1em] w-[0.65ch] shrink-0 bg-cursor align-middle"
                     aria-hidden
                   />
                 </span>
