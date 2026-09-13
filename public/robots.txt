@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://chengsokdara.github.io/
+
+Sitemap: https://chengsokdara.github.io/sitemap.xml
