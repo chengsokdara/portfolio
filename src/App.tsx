@@ -16,6 +16,7 @@ import {
   social,
   stack,
 } from './data/site'
+import { MatrixRain } from './components/MatrixRain'
 
 type Line =
   | { kind: 'boot'; text: string; tone?: Tone }
@@ -89,7 +90,7 @@ function CommandFrame({
 }) {
   const label = command.trim().split(/\s+/)[0]?.toLowerCase() || 'cmd'
   return (
-    <div data-cmd-frame className="my-3 overflow-hidden rounded-md border border-line/80 bg-bg-2/50">
+    <div data-cmd-frame className="frame-in my-3 overflow-hidden rounded-md border border-line/80 bg-bg-2/50">
       <div className="flex items-center gap-2 border-b border-line/80 bg-bg/80 px-3 py-1.5">
         <span className="text-dim">#</span>
         <span className="text-yellow font-semibold tracking-wide">{label}</span>
@@ -182,8 +183,8 @@ function runCommand(raw: string): ReactNode {
     case 'work':
     case 'experience':
     case 'jobs': {
-      const rows = experience.map((job) => (
-        <div key={job.company} className="border-l border-line pl-3">
+      const rows = experience.map((job, i) => (
+        <div key={job.company} className="reveal-row border-l border-line pl-3" style={{ animationDelay: `${i * 70}ms` }}>
           <p>
             <span className="text-cyan">{job.company}</span>
             <span className="text-dim"> / {job.role}</span>
@@ -227,8 +228,8 @@ function runCommand(raw: string): ReactNode {
       }
       return (
         <div className="space-y-4">
-          {filtered.map((p) => (
-            <div key={p.name} className="border-l border-line pl-3">
+          {filtered.map((p, i) => (
+            <div key={p.name} className="reveal-row border-l border-line pl-3" style={{ animationDelay: `${i * 70}ms` }}>
               <p>
                 <span className="text-yellow">{p.name}</span>
                 <span className="text-dim"> [{p.status}]</span>
@@ -255,8 +256,8 @@ function runCommand(raw: string): ReactNode {
     case 'github':
       return (
         <div className="space-y-3">
-          {openSource.map((r) => (
-            <div key={r.name}>
+          {openSource.map((r, i) => (
+            <div key={r.name} className="reveal-row" style={{ animationDelay: `${i * 80}ms` }}>
               <p>
                 <A href={r.href}>{r.name}</A>
                 <span className="text-yellow"> {r.stars}</span>
@@ -288,7 +289,7 @@ function runCommand(raw: string): ReactNode {
           <p className="pt-1 text-dim">clear ways to start:</p>
           <div className="mt-3 space-y-3">
             {offers.map((o, i) => (
-              <div key={o.id} className="border-l border-green/40 pl-3">
+              <div key={o.id} className="reveal-row border-l border-green/40 pl-3" style={{ animationDelay: `${i * 90}ms` }}>
                 <p>
                   <span className="text-dim">{i + 1}.</span>{' '}
                   <span className="text-cyan">{o.title}</span>
@@ -440,8 +441,12 @@ export default function App() {
   const [value, setValue] = useState('')
   const [history, setHistory] = useState<string[]>([])
   const [histIdx, setHistIdx] = useState(-1)
+  const [typing, setTyping] = useState(false)
+  const [clock, setClock] = useState(() => new Date())
+  const [hintPulse, setHintPulse] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const typingLock = useRef(false)
   const reducedMotion = useMemo(
     () =>
       typeof window !== 'undefined' &&
@@ -455,6 +460,17 @@ export default function App() {
       document.documentElement.dataset.theme = saved
     }
   }, [])
+
+  useEffect(() => {
+    const id = window.setInterval(() => setClock(new Date()), 1000)
+    return () => window.clearInterval(id)
+  }, [])
+
+  useEffect(() => {
+    if (booting || reducedMotion) return
+    const id = window.setTimeout(() => setHintPulse(true), 2200)
+    return () => window.clearTimeout(id)
+  }, [booting, reducedMotion])
 
   useEffect(() => {
     if (reducedMotion) {
@@ -509,13 +525,55 @@ export default function App() {
     [pushOutput],
   )
 
+  const runTyped = useCallback(
+    async (cmd: string) => {
+      if (booting || typingLock.current) return
+      typingLock.current = true
+      setTyping(true)
+      setHintPulse(false)
+      setValue('')
+      inputRef.current?.focus()
+
+      if (reducedMotion) {
+        setValue(cmd)
+        execute(cmd)
+        setValue('')
+        setTyping(false)
+        typingLock.current = false
+        return
+      }
+
+      for (let i = 0; i < cmd.length; i++) {
+        setValue(cmd.slice(0, i + 1))
+        await new Promise((r) => setTimeout(r, 28 + Math.random() * 32))
+      }
+      await new Promise((r) => setTimeout(r, 120))
+      execute(cmd)
+      setValue('')
+      setTyping(false)
+      typingLock.current = false
+      inputRef.current?.focus()
+    },
+    [booting, execute, reducedMotion],
+  )
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
+    if (typingLock.current || booting) return
     execute(value)
     setValue('')
   }
 
-  const focusInput = () => inputRef.current?.focus()
+  const focusInput = () => {
+    if (!typingLock.current) inputRef.current?.focus()
+  }
+
+  const clockLabel = clock.toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  })
 
   return (
     <div
@@ -537,12 +595,13 @@ export default function App() {
         }
       `}</style>
 
+      <MatrixRain active={!reducedMotion} />
       <div className="pointer-events-none absolute inset-0 scanlines opacity-40" aria-hidden />
 
       <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-1 flex-col fade-up">
         <header className="mb-3 flex items-end justify-between gap-3 text-xs sm:text-sm">
           <div>
-            <p className="text-2xl font-bold tracking-tight text-green sm:text-3xl">
+            <p className="title-shimmer text-2xl font-bold tracking-tight sm:text-3xl">
               {site.name}
             </p>
             <p className="mt-0.5 text-xs text-dim sm:text-sm">
@@ -577,8 +636,10 @@ export default function App() {
             <span className="ml-2 truncate text-xs text-dim">
               {PROMPT}:{HOST_PATH} / zsh
             </span>
-            <span className="ml-auto hidden text-[10px] uppercase tracking-wider text-dim sm:inline">
-              dark · type help
+            <span className="ml-auto hidden items-center gap-2 text-[10px] uppercase tracking-wider text-dim sm:inline-flex">
+              <span className="status-pulse h-1.5 w-1.5 rounded-full bg-green" aria-hidden />
+              <span>{clockLabel}</span>
+              <span>· live</span>
             </span>
           </div>
 
@@ -668,7 +729,7 @@ export default function App() {
                     }}
                     style={{ width: `${Math.max(value.length, 0)}ch` }}
                     className="max-w-full bg-transparent text-fg caret-transparent outline-none"
-                    disabled={booting}
+                    disabled={booting || typing}
                   />
                   <span
                     className="blink z-10 ml-px inline-block h-[1.1em] w-[0.65ch] shrink-0 bg-cursor align-middle"
@@ -682,16 +743,18 @@ export default function App() {
         </section>
 
         <div className="mt-3 flex flex-wrap gap-2" aria-label="Quick commands">
-          {QUICK.map((cmd) => (
+          {QUICK.map((cmd, i) => (
             <button
               key={cmd}
               type="button"
-              disabled={booting}
-              onClick={() => {
-                execute(cmd)
-                focusInput()
-              }}
-              className="rounded border border-line bg-bg-2 px-2.5 py-1 text-xs text-cyan transition hover:border-green/50 hover:text-green disabled:opacity-40"
+              disabled={booting || typing}
+              onClick={() => void runTyped(cmd)}
+              style={{ animationDelay: `${400 + i * 60}ms` }}
+              className={`chip-pop chip-live rounded border border-line bg-bg-2 px-2.5 py-1 text-xs text-cyan disabled:opacity-40 ${
+                hintPulse && cmd === 'hire'
+                  ? 'border-green/60 text-green shadow-[0_0_18px_rgba(61,214,140,0.35)]'
+                  : ''
+              }`}
             >
               {cmd}
             </button>
