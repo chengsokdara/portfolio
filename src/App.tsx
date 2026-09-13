@@ -89,7 +89,7 @@ function CommandFrame({
 }) {
   const label = command.trim().split(/\s+/)[0]?.toLowerCase() || 'cmd'
   return (
-    <div className="my-3 overflow-hidden rounded-md border border-line/80 bg-bg-2/50">
+    <div data-cmd-frame className="my-3 overflow-hidden rounded-md border border-line/80 bg-bg-2/50">
       <div className="flex items-center gap-2 border-b border-line/80 bg-bg/80 px-3 py-1.5">
         <span className="text-dim">#</span>
         <span className="text-yellow font-semibold tracking-wide">{label}</span>
@@ -164,7 +164,7 @@ function runCommand(raw: string): ReactNode {
       return (
         <Block>
           <p>
-            <span className="text-green">{site.name}</span>
+            <span className="text-2xl font-bold text-green sm:text-3xl">{site.name}</span>
             <span className="text-dim"> aka ra</span>
           </p>
           <p className="text-fg">{site.role}</p>
@@ -209,7 +209,12 @@ function runCommand(raw: string): ReactNode {
           ) : null}
         </div>
       ))
-      return <div className="space-y-4">{rows}</div>
+      return (
+        <div className="space-y-4">
+          <p className="text-dim text-xs">latest first</p>
+          {rows}
+        </div>
+      )
     }
 
     case 'projects':
@@ -466,7 +471,15 @@ export default function App() {
   }, [bootCount, reducedMotion])
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })
+    const behavior: ScrollBehavior = reducedMotion ? 'auto' : 'smooth'
+    // Prefer the start of the latest command output so long lists (work) begin on-screen.
+    const frames = document.querySelectorAll('[data-cmd-frame]')
+    const last = frames[frames.length - 1]
+    if (last) {
+      last.scrollIntoView({ behavior, block: 'start' })
+      return
+    }
+    bottomRef.current?.scrollIntoView({ behavior, block: 'end' })
   }, [lines, bootCount, booting, reducedMotion])
 
   const pushOutput = useCallback((nodes: ReactNode) => {
@@ -529,11 +542,14 @@ export default function App() {
       <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-1 flex-col fade-up">
         <header className="mb-3 flex items-end justify-between gap-3 text-xs sm:text-sm">
           <div>
-            <p className="text-green font-semibold tracking-tight">
+            <p className="text-2xl font-bold tracking-tight text-green sm:text-3xl">
               {site.name}
-              <span className="text-dim font-normal"> / portfolio.sh</span>
             </p>
-            <p className="text-dim">{site.role}</p>
+            <p className="mt-0.5 text-xs text-dim sm:text-sm">
+              <span className="text-dim">portfolio.sh</span>
+              <span className="text-dim"> · </span>
+              {site.role}
+            </p>
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2">
             <A href={`mailto:${site.email}?subject=Project%20inquiry%20-%20Sokdara%20Cheng`}>
@@ -639,11 +655,10 @@ export default function App() {
                       if (match) setValue(match)
                     }
                   }}
-                  className="min-w-0 flex-1 bg-transparent text-fg outline-none placeholder:text-dim/50"
+                  className="min-w-0 flex-1 bg-transparent text-fg caret-green outline-none placeholder:text-dim/50"
                   placeholder={booting ? '' : 'try hire or whoami'}
                   disabled={booting}
                 />
-                <span className="blink ml-0.5 inline-block h-4 w-2 bg-cursor" aria-hidden />
               </form>
             )}
             <div ref={bottomRef} />
